@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Página no encontrada — Clear Finance</title>
+  <link rel="stylesheet" href="/assets/css/global.css"/>
+  <style>
+    .error-page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:4rem 2rem; position:relative; overflow:hidden; }
+    .error-page::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,154,90,0.05) 0%, transparent 70%); pointer-events:none; }
+    .error-num { font-family:var(--serif); font-size:clamp(6rem,20vw,14rem); font-weight:300; color:rgba(184,154,90,0.12); line-height:1; display:block; margin-bottom:1rem; }
+    .error-title { font-family:var(--serif); font-size:clamp(1.8rem,4vw,3rem); font-weight:300; margin-bottom:1rem; }
+    .error-title em { font-style:italic; color:var(--gold-light); }
+    .error-desc { font-size:0.95rem; color:rgba(248,246,241,.5); max-width:420px; line-height:1.9; margin-bottom:3rem; }
+    .error-links { display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links">
+      <li><a href="/pages/blog.html">Artículos</a></li>
+      <li><a href="/tools/index.html">Herramientas</a></li>
+      <li><a href="/pages/about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="error-page">
+    <span class="error-num">404</span>
+    <h1 class="error-title">Esta página <em>no existe.</em></h1>
+    <p class="error-desc">Pero tu dinero sí. Quizás moviste un enlace, escribiste mal la URL, o simplemente el contenido ya no está aquí. De cualquier forma, podemos llevarte a donde necesitas ir.</p>
+    <div class="error-links">
+      <a href="/index.html" class="btn-primary">Ir al inicio</a>
+      <a href="/pages/blog.html" class="btn-outline">Ver artículos</a>
+    </div>
+  </div>
+</body>
+</html>

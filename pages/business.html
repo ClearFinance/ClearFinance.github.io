@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Clear Finance para Empresas — Contenido financiero práctico para emprendedores, dueños de pymes y fundadores de startups."/>
+  <title>Para Empresas — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <link rel="stylesheet" href="../assets/css/blog.css"/>
+  <style>
+    /* ── HERO BUSINESS ── */
+    .business-hero {
+      padding: 10rem 4rem 6rem;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .business-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 80% at 80% 50%, rgba(184,154,90,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 50% at 10% 80%, rgba(184,154,90,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .business-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      font-weight: 300;
+      line-height: 1.0;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+    .business-hero-title em { font-style: italic; color: var(--gold-light); }
+    .business-hero-sub {
+      font-size: 1rem;
+      color: rgba(248,246,241,0.55);
+      line-height: 1.9;
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+    .business-hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+
+    /* Métricas en el hero */
+    .hero-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      animation: fadeLeft 1s ease forwards 0.6s;
+    }
+    .hero-metric {
+      padding: 2rem 2.5rem;
+      border: 1px solid rgba(184,154,90,0.12);
+      border-bottom: none;
+      background: rgba(184,154,90,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-metric:last-child { border-bottom: 1px solid rgba(184,154,90,0.12); }
+    .hero-metric::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .hero-metric:hover::before { opacity: 1; }
+    .metric-big { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: var(--gold-light); display: block; line-height: 1; margin-bottom: 0.4rem; }
+    .metric-text { font-size: 0.83rem; color: rgba(248,246,241,0.5); line-height: 1.6; }
+    .metric-source { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; display: block; }
+
+    /* ── AUDIENCIA ── */
+    .audience-section {
+      padding: 6rem 4rem;
+      background: var(--dark);
+    }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(184,154,90,0.1);
+      margin-top: 3.5rem;
+    }
+    .audience-card {
+      background: var(--dark);
+      padding: 2.8rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .audience-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.4s;
+    }
+    .audience-card:hover::after { width: 100%; }
+    .audience-icon { font-size: 1.8rem; margin-bottom: 1.5rem; display: block; }
+    .audience-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; margin-bottom: 0.8rem; }
+    .audience-desc { font-size: 0.85rem; color: rgba(248,246,241,0.45); line-height: 1.85; }
+
+    /* ── FILTROS BUSINESS (distintos colores al blog) ── */
+    .business-filters {
+      padding: 0 4rem 3rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* ── ARTÍCULOS DESTACADOS BUSINESS ── */
+    .business-featured {
+      padding: 0 4rem;
+      margin-bottom: 2px;
+    }
+    .featured-business-card {
+      background: var(--dark);
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.3s;
+    }
+    .featured-business-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.5s;
+    }
+    .featured-business-card:hover { background: rgba(184,154,90,0.03); }
+    .featured-business-card:hover::after { width: 100%; }
+    .featured-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .featured-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .featured-excerpt {
+      font-size: 0.88rem;
+      color: rgba(248,246,241,0.5);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .featured-side-title {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .featured-topics {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .featured-topic {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: rgba(248,246,241,0.6);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(184,154,90,0.07);
+    }
+    .featured-topic span { color: var(--gold); font-family: var(--mono); font-size: 0.7rem; }
+
+    /* ── RECURSOS EXTRA ── */
+    .resources-section {
+      padding: 6rem 4rem;
+      background: var(--dark);
+    }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px;
+      background: rgba(184,154,90,0.1);
+      margin-top: 3.5rem;
+    }
+    .resource-card {
+      background: var(--dark);
+      padding: 2.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      gap: 1.8rem;
+      align-items: flex-start;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .resource-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.4s;
+    }
+    .resource-card:hover { background: rgba(184,154,90,0.04); }
+    .resource-card:hover::after { width: 100%; }
+    .resource-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .resource-tag { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+    .resource-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 300; margin-bottom: 0.5rem; }
+    .resource-desc { font-size: 0.82rem; color: rgba(248,246,241,0.4); line-height: 1.8; }
+
+    /* ── CTA FINAL ── */
+    .business-cta {
+      padding: 7rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .business-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(184,154,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .business-cta-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .business-cta-title em { font-style: italic; color: var(--gold-light); }
+    .business-cta-sub {
+      font-size: 0.95rem;
+      color: rgba(248,246,241,0.5);
+      max-width: 440px;
+      margin: 0 auto 3rem;
+      line-height: 1.9;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .business-hero { grid-template-columns: 1fr; gap: 3rem; padding: 8rem 2.5rem 4rem; }
+      .audience-section, .resources-section, .business-cta { padding: 5rem 2.5rem; }
+      .business-filters { padding: 0 2.5rem 2.5rem; }
+      .business-featured { padding: 0 2.5rem; }
+      .featured-business-card { grid-template-columns: 1fr; padding: 2.5rem; gap: 2rem; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .resources-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .business-hero { padding: 7rem 1.5rem 3rem; }
+      .audience-section, .resources-section, .business-cta { padding: 4rem 1.5rem; }
+      .business-filters { padding: 0 1.5rem 2rem; }
+      .business-featured { padding: 0 0; }
+      .featured-business-card { padding: 2rem 1.5rem; }
+      .articles-grid { padding: 0 0 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html">Artículos</a></li>
+      <li><a href="business.html" class="active">Negocios</a></li>
+      <li><a href="../tools/index.html">Herramientas</a></li>
+      <li><a href="about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn" onclick="window.location.href='../en/pages/business.html'">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="business-hero">
+    <div>
+      <p class="section-tag">Para Empresas · For Business</p>
+      <h1 class="business-hero-title">
+        Finanzas que<br>hacen crecer<br><em>tu negocio.</em>
+      </h1>
+      <p class="business-hero-sub">
+        Contenido financiero pensado para emprendedores, dueños de pymes y fundadores de startups. Nada de teoría vacía — solo lo que necesitas saber para tomar decisiones que importan.
+      </p>
+      <div class="business-hero-cta">
+        <a href="#articulos" class="btn-primary">Ver artículos</a>
+        <a href="../tools/index.html" class="btn-outline">Herramientas gratis</a>
+      </div>
+    </div>
+
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <span class="metric-big">78%</span>
+        <p class="metric-text">de las pymes tienen problemas de flujo de caja en sus primeros 3 años.</p>
+        <span class="metric-source">BID · 2024</span>
+      </div>
+      <div class="hero-metric">
+        <span class="metric-big">62%</span>
+        <p class="metric-text">de las startups fallan por razones financieras, no por falta de producto.</p>
+        <span class="metric-source">CB Insights · 2024</span>
+      </div>
+      <div class="hero-metric">
+        <span class="metric-big">3x</span>
+        <p class="metric-text">más probable que un negocio sobreviva si su dueño tiene educación financiera básica.</p>
+        <span class="metric-source">Clear Finance · Research</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── PARA QUIÉN ES ── -->
+  <section class="audience-section">
+    <div>
+      <p class="section-tag">¿Para quién es esto? · Who is this for?</p>
+      <h2 class="section-title">Construido para<br><em>quien construye.</em></h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <span class="audience-icon">🌱</span>
+        <h3 class="audience-title">Emprendedores que empiezan</h3>
+        <p class="audience-desc">¿Acabas de lanzar tu negocio o estás a punto de hacerlo? Aquí aprendes a estructurar tus finanzas desde el primer día: cuentas separadas, flujo de caja básico y cómo no quedarte sin capital en los primeros meses.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-icon">🏗️</span>
+        <h3 class="audience-title">Dueños de pymes en crecimiento</h3>
+        <p class="audience-desc">Tu negocio ya funciona pero quieres llevarlo al siguiente nivel. Abordamos temas como financiamiento, proyecciones, márgenes reales y cómo leer tus estados financieros sin ser contador.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-icon">🚀</span>
+        <h3 class="audience-title">Fundadores de startups</h3>
+        <p class="audience-desc">Desde cómo presentar métricas a inversionistas hasta cuándo levantar capital y en qué condiciones. El lenguaje financiero del ecosistema startup, explicado sin rodeos.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── ARTÍCULO DESTACADO ── -->
+  <section style="padding: 5rem 0 0; background: var(--black);">
+    <div style="padding: 0 4rem; margin-bottom: 2rem;">
+      <p class="section-tag">Artículo destacado · Featured Article</p>
+    </div>
+    <div style="padding: 0 4rem;">
+      <a href="../articles/es/flujo-de-caja.html" class="featured-business-card">
+        <div>
+          <span class="featured-label">Pymes & Startups · Fundamental</span>
+          <h2 class="featured-title">Flujo de caja: el número que todo emprendedor debe dominar</h2>
+          <p class="featured-excerpt">La diferencia entre un negocio rentable y uno que cierra suele estar en el flujo de caja. Muchas empresas tienen ganancias en papel pero no tienen efectivo para pagar el mes. Te enseñamos a leerlo, gestionarlo y proyectarlo.</p>
+          <div class="article-meta" style="margin-bottom: 2rem;">
+            <span>10 min de lectura</span>
+            <span>Diciembre 2024</span>
+            <span>Esencial</span>
+          </div>
+          <span class="read-more">Leer artículo</span>
+        </div>
+        <div>
+          <span class="featured-side-title">Lo que aprenderás en esta sección</span>
+          <div class="featured-topics">
+            <div class="featured-topic"><span>→</span> Leer y gestionar tu flujo de caja</div>
+            <div class="featured-topic"><span>→</span> Cuándo y cómo pedir financiamiento</div>
+            <div class="featured-topic"><span>→</span> Contabilidad básica sin ser contador</div>
+            <div class="featured-topic"><span>→</span> Proyecciones y métricas clave (KPIs)</div>
+            <div class="featured-topic"><span>→</span> Valoración y estructura de capital</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FILTROS Y ARTÍCULOS ── -->
+  <section id="articulos" style="background: var(--black); padding-top: 4rem;">
+    <div class="business-filters">
+      <span class="filter-label">Filtrar por:</span>
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="flujo">Flujo de caja</button>
+      <button class="filter-btn" data-filter="financiamiento">Financiamiento</button>
+      <button class="filter-btn" data-filter="contabilidad">Contabilidad</button>
+      <button class="filter-btn" data-filter="crecimiento">Crecimiento</button>
+      <button class="filter-btn" data-filter="metricas">Métricas & KPIs</button>
+    </div>
+
+    <div class="divider" style="margin: 0 4rem 3rem;"></div>
+
+    <div class="articles-grid" id="articles-grid">
+
+      <a href="../articles/es/flujo-de-caja.html" class="article-card" data-cat="flujo">
+        <span class="card-category">Flujo de caja</span>
+        <h2 class="card-title">Flujo de caja: el número que todo emprendedor debe dominar</h2>
+        <p class="card-excerpt">Un negocio puede ser rentable en papel y quedarse sin efectivo en semanas. La diferencia casi siempre está en el flujo de caja.</p>
+        <div class="card-meta">
+          <span>10 min de lectura</span>
+          <span class="card-meta-dot"></span>
+          <span>Abril 2026</span>
+          <span class="card-meta-dot"></span>
+          <span>Principiante</span>
+        </div>
+      </a>
+
+      <a href="../articles/es/contabilidad-basica-pymes.html" class="article-card" data-cat="contabilidad">
+        <span class="card-category">Contabilidad</span>
+        <h2 class="card-title">Los 3 estados financieros que todo dueño de negocio debe entender</h2>
+        <p class="card-excerpt">Balance general, estado de resultados y flujo de caja — los tres documentos que cuentan la historia financiera completa de tu negocio.</p>
+        <div class="card-meta">
+          <span>12 min de lectura</span>
+          <span class="card-meta-dot"></span>
+          <span>Marzo 2026</span>
+          <span class="card-meta-dot"></span>
+          <span>Principiante</span>
+        </div>
+      </a>
+
+      <a href="../articles/es/cuando-pedir-credito.html" class="article-card" data-cat="financiamiento">
+        <span class="card-category">Financiamiento</span>
+        <h2 class="card-title">¿Cuándo tiene sentido endeudarse para crecer? La regla del apalancamiento</h2>
+        <p class="card-excerpt">La deuda no es buena ni mala — es una herramienta. La clave es una pregunta: ¿el retorno del proyecto supera el costo del crédito?</p>
+        <div class="card-meta">
+          <span>9 min de lectura</span>
+          <span class="card-meta-dot"></span>
+          <span>Marzo 2026</span>
+          <span class="card-meta-dot"></span>
+          <span>Principiante</span>
+        </div>
+      </a>
+
+      <a href="../articles/es/kpis-pymes.html" class="article-card" data-cat="metricas">
+        <span class="card-category">Métricas & KPIs</span>
+        <h2 class="card-title">Los 7 KPIs financieros esenciales para tu pyme</h2>
+        <p class="card-excerpt">Margen bruto, EBITDA, razón corriente, ROE, burn rate... Los indicadores que distinguen negocios que escalan de los que sobreviven.</p>
+        <div class="card-meta">
+          <span>11 min de lectura</span>
+          <span class="card-meta-dot"></span>
+          <span>Abril 2026</span>
+          <span class="card-meta-dot"></span>
+          <span>Intermedio</span>
+        </div>
+      </a>
+
+      <a href="../articles/es/proyecciones-financieras.html" class="article-card" data-cat="crecimiento">
+        <span class="card-category">Crecimiento</span>
+        <h2 class="card-title">Cómo hacer proyecciones financieras realistas para tu startup o pyme</h2>
+        <p class="card-excerpt">Las proyecciones no son predicciones — son hipótesis estructuradas. Aprende a construirlas, usarlas y actualizarlas cuando la realidad no coincide.</p>
+        <div class="card-meta">
+          <span>12 min de lectura</span>
+          <span class="card-meta-dot"></span>
+          <span>Abril 2026</span>
+          <span class="card-meta-dot"></span>
+          <span>Intermedio</span>
+        </div>
+      </a>
+
+      <!-- Teaser: próximo artículo -->
+      <div class="article-card" style="background:rgba(184,154,90,0.03); border:1px solid rgba(184,154,90,0.12); cursor:default;" data-cat="financiamiento">
+        <span class="card-category" style="color:var(--muted);">Próximamente · Coming Soon</span>
+        <h2 class="card-title" style="color:rgba(248,246,241,0.4);">Bootstrapping, ángeles, VCs y crowdfunding: mapa completo de financiamiento para startups</h2>
+        <div class="card-meta">
+          <span style="color:var(--muted);">Próximamente disponible</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── RECURSOS EXTRA ── -->
+  <section class="resources-section">
+    <p class="section-tag">Recursos útiles · Useful Resources</p>
+    <h2 class="section-title">Más allá de los<br><em>artículos.</em></h2>
+    <div class="resources-grid">
+      <a href="../tools/compound.html" class="resource-card">
+        <span class="resource-icon">📊</span>
+        <div>
+          <span class="resource-tag">Herramienta · Tool</span>
+          <h3 class="resource-title">Calculadora de Interés Compuesto</h3>
+          <p class="resource-desc">Proyecta el crecimiento de tu inversión o reinversión de utilidades a lo largo del tiempo.</p>
+        </div>
+      </a>
+      <a href="../tools/roi.html" class="resource-card">
+        <span class="resource-icon">📉</span>
+        <div>
+          <span class="resource-tag">Herramienta · Tool</span>
+          <h3 class="resource-title">Calculadora de ROI</h3>
+          <p class="resource-desc">Evalúa si una inversión o proyecto dentro de tu empresa realmente vale la pena.</p>
+        </div>
+      </a>
+      <a href="../tools/goals.html" class="resource-card">
+        <span class="resource-icon">🎯</span>
+        <div>
+          <span class="resource-tag">Herramienta · Tool</span>
+          <h3 class="resource-title">Planificador de Metas Financieras</h3>
+          <p class="resource-desc">Calcula cuánto necesitas generar o ahorrar para alcanzar una meta de negocio específica.</p>
+        </div>
+      </a>
+      <a href="blog.html" class="resource-card">
+        <span class="resource-icon">📚</span>
+        <div>
+          <span class="resource-tag">Blog · Articles</span>
+          <h3 class="resource-title">Sección de Finanzas Personales</h3>
+          <p class="resource-desc">Porque un buen empresario también administra bien su dinero personal. Separar las finanzas del negocio de las personales es clave.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CTA NEWSLETTER ── -->
+  <section class="business-cta">
+    <p class="section-tag">Newsletter · Empresas</p>
+    <h2 class="business-cta-title">
+      Finanzas para tu negocio,<br>
+      <em>cada semana.</em>
+    </h2>
+    <p class="business-cta-sub">Artículos, análisis y recursos pensados para emprendedores. Sin spam. En español e inglés. Cancela cuando quieras.</p>
+    <div style="display:flex; max-width:460px; margin:0 auto;">
+      <input type="email" class="newsletter-input" placeholder="tu@empresa.com" style="flex:1; background:rgba(248,246,241,0.05); border:1px solid rgba(184,154,90,0.25); border-right:none; color:var(--white); padding:1rem 1.5rem; font-family:var(--sans); font-size:.85rem; outline:none; transition:border-color .2s;">
+      <button style="background:var(--gold); color:var(--black); border:none; padding:1rem 2rem; font-family:var(--sans); font-size:.75rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">Suscribirme</button>
+    </div>
+    <p style="font-family:var(--mono); font-size:.62rem; letter-spacing:.1em; color:rgba(248,246,241,.25); margin-top:1.2rem; text-transform:uppercase;">Sin spam · Cancela cuando quieras · Cancel Anytime</p>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores. Construido desde la academia, pensado para la vida real.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Para Empresas</span>
+        <ul class="footer-links">
+          <li><a href="business.html?cat=flujo">Flujo de caja</a></li>
+          <li><a href="business.html?cat=financiamiento">Financiamiento</a></li>
+          <li><a href="business.html?cat=contabilidad">Contabilidad</a></li>
+          <li><a href="business.html?cat=metricas">Métricas & KPIs</a></li>
+          <li><a href="business.html?cat=crecimiento">Crecimiento</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../tools/roi.html">Rentabilidad (ROI)</a></li>
+          <li><a href="../tools/goals.html">Metas de Ahorro</a></li>
+          <li><a href="../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="blog.html">Finanzas Personales</a></li>
+          <li><a href="about.html">Sobre nosotros</a></li>
+          <li><a href="../index.html#newsletter">Newsletter</a></li>
+          <li><a href="about.html#contact">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter / X</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Filtros
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.article-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Leer categoría de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const cat = urlParams.get('cat');
+    if (cat) {
+      const targetBtn = document.querySelector(`.filter-btn[data-filter="${cat}"]`);
+      if (targetBtn) targetBtn.click();
+    }
+  </script>
+
+</body>
+</html>

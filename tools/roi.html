@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadora de ROI gratuita — calcula el retorno sobre tu inversión, el rendimiento anualizado (CAGR) y compara distintas alternativas de inversión."/>
+  <title>Calculadora de ROI / Rentabilidad — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <link rel="stylesheet" href="../assets/css/tools.css"/>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pages/blog.html">Artículos</a></li>
+      <li><a href="../pages/business.html">Negocios</a></li>
+      <li><a href="index.html" class="active">Herramientas</a></li>
+      <li><a href="../pages/about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="calculator-page">
+
+    <div class="calc-header">
+      <nav class="calc-breadcrumb">
+        <a href="../index.html">Inicio</a>
+        <span>›</span>
+        <a href="index.html">Herramientas</a>
+        <span>›</span>
+        <span>ROI / Rentabilidad</span>
+      </nav>
+      <h1 class="calc-title">Calculadora de<br><em>ROI y Rentabilidad</em></h1>
+      <p class="calc-description">Calcula el retorno sobre tu inversión (ROI), el rendimiento anualizado (CAGR) y compara hasta dos alternativas de inversión para elegir la más conveniente.</p>
+    </div>
+
+    <!-- Selector de modo -->
+    <div style="padding:0 4rem; margin-bottom:2rem;">
+      <div style="display:inline-flex; gap:0; border:1px solid rgba(184,154,90,0.2); overflow:hidden;">
+        <button id="btn-simple" onclick="setMode('simple')" style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.7rem 1.5rem; border:none; cursor:pointer; transition:all 0.2s; background:var(--gold); color:var(--black);">ROI simple</button>
+        <button id="btn-compare" onclick="setMode('compare')" style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.7rem 1.5rem; border:none; cursor:pointer; transition:all 0.2s; background:var(--dark); color:rgba(248,246,241,0.5);">Comparar inversiones</button>
+      </div>
+    </div>
+
+    <!-- MODO SIMPLE -->
+    <div id="mode-simple" class="calc-body">
+
+      <div class="calc-inputs">
+        <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Datos de la inversión</p>
+
+        <div class="input-group">
+          <label class="input-label">Inversión inicial</label>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="initial-inv" value="5000000" min="0"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Valor final de la inversión</label>
+          <span class="input-hint">Cuánto vale hoy o cuánto esperas que valga</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="final-val" value="7500000" min="0"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Ingresos adicionales recibidos</label>
+          <span class="input-hint">Dividendos, arriendos, cupones u otros flujos (puede ser 0)</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="income" value="0" min="0"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Período de la inversión</label>
+          <input type="range" class="calc-range" id="period-slider" min="1" max="120" step="1" value="24"/>
+          <div class="range-labels"><span>1 mes</span><span id="period-val">24 meses</span><span>10 años</span></div>
+        </div>
+
+      </div>
+
+      <div class="calc-results">
+        <span class="results-label">Resultados</span>
+
+        <div class="result-main">
+          <span class="result-main-label">ROI total</span>
+          <span class="result-main-value" id="roi-total">0%</span>
+        </div>
+
+        <div class="result-row">
+          <span class="result-row-label">Rendimiento anualizado (CAGR)</span>
+          <span class="result-row-value positive" id="cagr">0%</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Ganancia neta</span>
+          <span class="result-row-value positive" id="net-gain">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Inversión inicial</span>
+          <span class="result-row-value" id="inv-display">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Valor final + ingresos</span>
+          <span class="result-row-value" id="final-display">$0</span>
+        </div>
+
+        <!-- Contexto del rendimiento -->
+        <div style="margin-top:2rem; padding:1.5rem; background:rgba(184,154,90,0.04); border:1px solid rgba(184,154,90,0.12);">
+          <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;">Comparación de referencia</p>
+          <div id="benchmark-rows"></div>
+        </div>
+
+        <p class="calc-note">El ROI no considera inflación ni impuestos. Para comparaciones precisas usa siempre el CAGR (rendimiento anualizado).</p>
+      </div>
+    </div>
+
+    <!-- MODO COMPARAR -->
+    <div id="mode-compare" class="calc-body" style="display:none;">
+
+      <div class="calc-inputs">
+        <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Inversión A</p>
+
+        <div class="input-group">
+          <label class="input-label">Nombre</label>
+          <input type="text" class="calc-input" id="name-a" value="Fondo de acciones" style="padding:0.7rem 1rem;"/>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Inversión inicial ($)</label>
+          <div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="calc-input has-prefix" id="inv-a" value="10000000" min="0"/></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Valor final esperado ($)</label>
+          <div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="calc-input has-prefix" id="final-a" value="16000000" min="0"/></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Ingresos adicionales ($)</label>
+          <div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="calc-input has-prefix" id="income-a" value="0" min="0"/></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Período (meses)</label>
+          <input type="number" class="calc-input" id="months-a" value="36" min="1" style="padding:0.7rem 1rem;"/>
+        </div>
+
+        <div style="height:1.5px; background:rgba(184,154,90,0.15); margin:1.5rem 0;"></div>
+
+        <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Inversión B</p>
+
+        <div class="input-group">
+          <label class="input-label">Nombre</label>
+          <input type="text" class="calc-input" id="name-b" value="CDT bancario" style="padding:0.7rem 1rem;"/>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Inversión inicial ($)</label>
+          <div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="calc-input has-prefix" id="inv-b" value="10000000" min="0"/></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Valor final esperado ($)</label>
+          <div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="calc-input has-prefix" id="final-b" value="13200000" min="0"/></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Ingresos adicionales ($)</label>
+          <div class="input-wrapper"><span class="input-prefix">$</span><input type="number" class="calc-input has-prefix" id="income-b" value="0" min="0"/></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Período (meses)</label>
+          <input type="number" class="calc-input" id="months-b" value="36" min="1" style="padding:0.7rem 1rem;"/>
+        </div>
+
+        <button class="calc-btn" onclick="calculateCompare()">Ver comparación</button>
+      </div>
+
+      <div class="calc-results">
+        <span class="results-label">Comparación</span>
+
+        <div id="compare-results">
+          <p style="font-size:0.85rem; color:rgba(248,246,241,0.4); margin-top:1rem;">Completa los datos y presiona Comparar.</p>
+        </div>
+
+        <p class="calc-note">La comparación usa el CAGR (rendimiento anual compuesto) para igualar los plazos. No considera riesgo, liquidez ni impuestos.</p>
+      </div>
+    </div>
+
+    <div class="calc-explainer">
+      <h2>ROI vs. CAGR: cuál usar y cuándo</h2>
+      <p>El <strong>ROI (Return on Investment)</strong> mide el retorno total sobre una inversión: (Ganancia neta / Inversión inicial) × 100. Es útil para comparar dos inversiones del mismo plazo, pero engañoso para plazos distintos — un ROI del 50% en 1 año es muy diferente a uno en 10 años.</p>
+      <p>El <strong>CAGR (Compound Annual Growth Rate)</strong> o rendimiento anualizado compuesto es la tasa que, aplicada año tras año, llevaría la inversión de su valor inicial al final. Es la métrica correcta para comparar inversiones de distinto plazo o para comparar con benchmarks de mercado.</p>
+      <p>Siempre que compares dos inversiones de plazos diferentes, usa el CAGR. Un fondo que rindió 80% en 5 años tiene un CAGR del 12.5% anual. Un bono que rindió 35% en 3 años tiene un CAGR del 10.5%. El bono tiene menor CAGR aunque su ROI parezca más bajo.</p>
+      <a href="../articles/es/portafolio-desde-cero.html" class="read-more" style="margin-top:1rem; display:inline-flex;">Leer: Cómo construir un portafolio desde cero</a>
+    </div>
+
+  </div>
+
+  <section style="padding:4rem; background:var(--dark); border-top:1px solid rgba(184,154,90,0.1);">
+    <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Otras herramientas · More Tools</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5px; background:rgba(184,154,90,0.1);">
+      <a href="compound.html" class="tool-index-card"><span class="tool-card-icon">📊</span><h3 class="tool-card-name">Interés Compuesto</h3><p class="tool-card-desc">Visualiza el crecimiento de tu inversión.</p><span class="tool-card-link">Usar</span></a>
+      <a href="mortgage.html" class="tool-index-card"><span class="tool-card-icon">🏠</span><h3 class="tool-card-name">Hipoteca</h3><p class="tool-card-desc">Cuota mensual y costo total.</p><span class="tool-card-link">Usar</span></a>
+      <a href="debt.html" class="tool-index-card"><span class="tool-card-icon">💳</span><h3 class="tool-card-name">Liquidación de Deuda</h3><p class="tool-card-desc">Avalancha vs bola de nieve.</p><span class="tool-card-link">Usar</span></a>
+      <a href="goals.html" class="tool-index-card"><span class="tool-card-icon">🎯</span><h3 class="tool-card-name">Metas de Ahorro</h3><p class="tool-card-desc">¿Cuánto ahorrar por mes?</p><span class="tool-card-link">Usar</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><a href="../index.html" class="footer-logo">Clear <span>Finance</span></a><p class="footer-about">Herramientas financieras gratuitas para tomar mejores decisiones.</p></div>
+      <div><span class="footer-col-title">Herramientas</span><ul class="footer-links"><li><a href="compound.html">Interés Compuesto</a></li><li><a href="mortgage.html">Hipoteca</a></li><li><a href="debt.html">Liquidación de Deuda</a></li><li><a href="goals.html">Metas de Ahorro</a></li><li><a href="roi.html">Rentabilidad (ROI)</a></li></ul></div>
+      <div><span class="footer-col-title">Artículos</span><ul class="footer-links"><li><a href="../articles/es/portafolio-desde-cero.html">Portafolio desde cero</a></li><li><a href="../articles/es/etfs-para-principiantes.html">ETFs para principiantes</a></li><li><a href="../articles/es/cuando-pedir-credito.html">¿Cuándo endeudarse?</a></li></ul></div>
+      <div><span class="footer-col-title">Blog</span><ul class="footer-links"><li><a href="../pages/blog.html">Artículos</a></li><li><a href="../pages/business.html">Negocios</a></li><li><a href="../pages/about.html">Nosotros</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Clear Finance · Todos los derechos reservados</p><div class="footer-social"><a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a></div></div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    document.getElementById('period-slider').addEventListener('input', () => {
+      const m = parseInt(document.getElementById('period-slider').value);
+      const y = Math.floor(m/12); const mo = m%12;
+      document.getElementById('period-val').textContent = y > 0 ? `${y} año${y>1?'s':''} ${mo>0?`y ${mo} mes${mo>1?'es':''}` : ''}` : `${m} meses`;
+      calculateROI();
+    });
+    document.getElementById('initial-inv').addEventListener('input', calculateROI);
+    document.getElementById('final-val').addEventListener('input', calculateROI);
+    document.getElementById('income').addEventListener('input', calculateROI);
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('es-CO'); }
+    function pct(n) { return (n >= 0 ? '+' : '') + n.toFixed(2) + '%'; }
+
+    function setMode(mode) {
+      document.getElementById('mode-simple').style.display = mode === 'simple' ? 'grid' : 'none';
+      document.getElementById('mode-compare').style.display = mode === 'compare' ? 'grid' : 'none';
+      document.getElementById('btn-simple').style.background = mode === 'simple' ? 'var(--gold)' : 'var(--dark)';
+      document.getElementById('btn-simple').style.color = mode === 'simple' ? 'var(--black)' : 'rgba(248,246,241,0.5)';
+      document.getElementById('btn-compare').style.background = mode === 'compare' ? 'var(--gold)' : 'var(--dark)';
+      document.getElementById('btn-compare').style.color = mode === 'compare' ? 'var(--black)' : 'rgba(248,246,241,0.5)';
+    }
+
+    function calculateROI() {
+      const initial = parseFloat(document.getElementById('initial-inv').value) || 0;
+      const final = parseFloat(document.getElementById('final-val').value) || 0;
+      const income = parseFloat(document.getElementById('income').value) || 0;
+      const months = parseInt(document.getElementById('period-slider').value);
+      const years = months / 12;
+
+      if (initial <= 0) return;
+
+      const totalReturn = final + income - initial;
+      const roi = (totalReturn / initial) * 100;
+      const cagr = (Math.pow((final + income) / initial, 1 / years) - 1) * 100;
+
+      document.getElementById('roi-total').textContent = pct(roi);
+      document.getElementById('roi-total').style.color = roi >= 0 ? 'var(--gold-light)' : '#e07070';
+      document.getElementById('cagr').textContent = pct(cagr);
+      document.getElementById('net-gain').textContent = fmt(totalReturn);
+      document.getElementById('net-gain').style.color = totalReturn >= 0 ? '#7ec98f' : '#e07070';
+      document.getElementById('inv-display').textContent = fmt(initial);
+      document.getElementById('final-display').textContent = fmt(final + income);
+
+      // Benchmarks de referencia
+      const benchmarks = [
+        { name: 'Inflación Colombia (2025 est.)', cagr: 5.5 },
+        { name: 'CDT bancario (promedio)', cagr: 10.5 },
+        { name: 'S&P 500 histórico (nominal)', cagr: 10.0 },
+        { name: 'MSCI Emerging Markets 10y', cagr: 5.8 },
+      ];
+      const rows = document.getElementById('benchmark-rows');
+      rows.innerHTML = '';
+      benchmarks.forEach(b => {
+        const diff = cagr - b.cagr;
+        const row = document.createElement('div');
+        row.className = 'result-row';
+        row.innerHTML = `
+          <span class="result-row-label" style="font-size:0.78rem;">${b.name}</span>
+          <span class="result-row-value" style="font-size:0.78rem; color:${diff >= 0 ? '#7ec98f' : '#e07070'};">${diff >= 0 ? '+' : ''}${diff.toFixed(1)}%</span>
+        `;
+        rows.appendChild(row);
+      });
+    }
+
+    function calculateCompare() {
+      function calcCAGR(inv, fin, inc, months) {
+        if (inv <= 0) return 0;
+        return (Math.pow((fin + inc) / inv, 12 / months) - 1) * 100;
+      }
+      function calcROI(inv, fin, inc) {
+        return ((fin + inc - inv) / inv) * 100;
+      }
+
+      const invA = parseFloat(document.getElementById('inv-a').value) || 0;
+      const finA = parseFloat(document.getElementById('final-a').value) || 0;
+      const incA = parseFloat(document.getElementById('income-a').value) || 0;
+      const mA = parseInt(document.getElementById('months-a').value) || 12;
+      const nameA = document.getElementById('name-a').value || 'Inversión A';
+
+      const invB = parseFloat(document.getElementById('inv-b').value) || 0;
+      const finB = parseFloat(document.getElementById('final-b').value) || 0;
+      const incB = parseFloat(document.getElementById('income-b').value) || 0;
+      const mB = parseInt(document.getElementById('months-b').value) || 12;
+      const nameB = document.getElementById('name-b').value || 'Inversión B';
+
+      const cagrA = calcCAGR(invA, finA, incA, mA);
+      const cagrB = calcCAGR(invB, finB, incB, mB);
+      const roiA = calcROI(invA, finA, incA);
+      const roiB = calcROI(invB, finB, incB);
+      const winner = cagrA >= cagrB ? nameA : nameB;
+      const diff = Math.abs(cagrA - cagrB);
+
+      const container = document.getElementById('compare-results');
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5px; background:rgba(184,154,90,0.1); margin-bottom:1.5rem;">
+          <div style="background:${cagrA >= cagrB ? 'rgba(126,201,143,0.06)' : 'var(--dark)'}; padding:1.5rem;">
+            <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;">${nameA}</p>
+            <p style="font-family:var(--serif); font-size:1.8rem; font-weight:300; color:var(--gold-light); margin-bottom:0.3rem;">${cagrA.toFixed(2)}%</p>
+            <p style="font-family:var(--mono); font-size:0.6rem; color:var(--muted);">CAGR anual</p>
+            <p style="font-size:0.78rem; color:rgba(248,246,241,0.5); margin-top:0.5rem;">ROI total: ${roiA.toFixed(1)}% en ${mA} meses</p>
+          </div>
+          <div style="background:${cagrB > cagrA ? 'rgba(126,201,143,0.06)' : 'var(--dark)'}; padding:1.5rem;">
+            <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;">${nameB}</p>
+            <p style="font-family:var(--serif); font-size:1.8rem; font-weight:300; color:var(--gold-light); margin-bottom:0.3rem;">${cagrB.toFixed(2)}%</p>
+            <p style="font-family:var(--mono); font-size:0.6rem; color:var(--muted);">CAGR anual</p>
+            <p style="font-size:0.78rem; color:rgba(248,246,241,0.5); margin-top:0.5rem;">ROI total: ${roiB.toFixed(1)}% en ${mB} meses</p>
+          </div>
+        </div>
+        <div style="padding:1.5rem; background:rgba(184,154,90,0.04); border:1px solid rgba(184,154,90,0.12);">
+          <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;">Veredicto</p>
+          <p style="font-size:0.85rem; color:rgba(248,246,241,0.75); line-height:1.8;"><strong>${winner}</strong> tiene un rendimiento anualizado ${diff.toFixed(2)} puntos porcentuales mayor. Esta comparación usa el CAGR para igualar los plazos distintos. Recuerda que el mayor rendimiento casi siempre implica mayor riesgo — evalúa ambos factores antes de decidir.</p>
+        </div>
+      `;
+    }
+
+    calculateROI();
+  </script>
+
+</body>
+</html>

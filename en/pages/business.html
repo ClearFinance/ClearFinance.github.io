@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Clear Finance for Business — Practical financial content for entrepreneurs, SME owners and startup founders."/>
+  <title>For Business — Clear Finance</title>
+  <link rel="stylesheet" href="../../assets/css/global.css"/>
+  <link rel="stylesheet" href="../../assets/css/blog.css"/>
+  <style>
+    .business-hero { padding:10rem 4rem 6rem; position:relative; overflow:hidden; display:grid; grid-template-columns:1.2fr 1fr; gap:6rem; align-items:center; }
+    .business-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(184,154,90,0.08) 0%, transparent 70%); pointer-events:none; }
+    .business-hero-title { font-family:var(--serif); font-size:clamp(3rem,6vw,5.8rem); font-weight:300; line-height:1.0; margin-bottom:1.8rem; opacity:0; animation:fadeUp .9s ease forwards .2s; }
+    .business-hero-title em { font-style:italic; color:var(--gold-light); }
+    .business-hero-sub { font-size:1rem; color:rgba(248,246,241,.55); line-height:1.9; max-width:460px; margin-bottom:2.5rem; opacity:0; animation:fadeUp .9s ease forwards .4s; }
+    .hero-metrics { display:flex; flex-direction:column; gap:0; opacity:0; animation:fadeLeft 1s ease forwards .6s; }
+    .hero-metric { padding:2rem 2.5rem; border:1px solid rgba(184,154,90,.12); border-bottom:none; background:rgba(184,154,90,.03); }
+    .hero-metric:last-child { border-bottom:1px solid rgba(184,154,90,.12); }
+    .metric-big { font-family:var(--serif); font-size:2.5rem; font-weight:300; color:var(--gold-light); display:block; line-height:1; margin-bottom:.4rem; }
+    .metric-text { font-size:.83rem; color:rgba(248,246,241,.5); line-height:1.6; }
+    .metric-source { font-family:var(--mono); font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; display:block; }
+    .audience-section { padding:6rem 4rem; background:var(--dark); }
+    .audience-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:rgba(184,154,90,.1); margin-top:3.5rem; }
+    .audience-card { background:var(--dark); padding:2.8rem 2.5rem; position:relative; overflow:hidden; }
+    .audience-card::after { content:''; position:absolute; bottom:0;left:0; width:0;height:1px; background:var(--gold); transition:width .4s; }
+    .audience-card:hover::after { width:100%; }
+    .audience-icon { font-size:1.8rem; margin-bottom:1.5rem; display:block; }
+    .audience-title { font-family:var(--serif); font-size:1.4rem; font-weight:300; margin-bottom:.8rem; }
+    .audience-desc { font-size:.85rem; color:rgba(248,246,241,.45); line-height:1.85; }
+    .featured-business-card { background:var(--dark); padding:4rem; display:grid; grid-template-columns:1.3fr 1fr; gap:4rem; align-items:center; text-decoration:none; color:inherit; transition:background .3s; position:relative; overflow:hidden; }
+    .featured-business-card::after { content:''; position:absolute; bottom:0;left:0; width:0;height:1px; background:var(--gold); transition:width .5s; }
+    .featured-business-card:hover { background:rgba(184,154,90,.03); }
+    .featured-business-card:hover::after { width:100%; }
+    .featured-label { font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; display:block; }
+    .featured-title { font-family:var(--serif); font-size:clamp(1.6rem,3vw,2.4rem); font-weight:300; line-height:1.2; margin-bottom:1.2rem; }
+    .featured-side-title { font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; display:block; }
+    .featured-topics { display:flex; flex-direction:column; gap:.8rem; }
+    .featured-topic { display:flex; align-items:center; gap:1rem; font-size:.85rem; color:rgba(248,246,241,.6); padding:.8rem 0; border-bottom:1px solid rgba(184,154,90,.07); }
+    .featured-topic span { color:var(--gold); font-family:var(--mono); font-size:.7rem; }
+    .resources-section { padding:6rem 4rem; background:var(--dark); }
+    .resources-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5px; background:rgba(184,154,90,.1); margin-top:3.5rem; }
+    .resource-card { background:var(--dark); padding:2.5rem; text-decoration:none; color:inherit; display:flex; gap:1.8rem; align-items:flex-start; transition:background .3s; position:relative; }
+    .resource-card::after { content:''; position:absolute; bottom:0;left:0; width:0;height:1px; background:var(--gold); transition:width .4s; }
+    .resource-card:hover { background:rgba(184,154,90,.04); }
+    .resource-card:hover::after { width:100%; }
+    .resource-icon { font-size:1.5rem; flex-shrink:0; margin-top:.2rem; opacity:.7; }
+    .resource-tag { font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:.35rem; }
+    .resource-title { font-family:var(--serif); font-size:1.2rem; font-weight:300; margin-bottom:.5rem; }
+    .resource-desc { font-size:.82rem; color:rgba(248,246,241,.4); line-height:1.8; }
+    @media (max-width:1024px) {
+      .business-hero { grid-template-columns:1fr; gap:3rem; padding:8rem 2.5rem 4rem; }
+      .audience-section,.resources-section { padding:5rem 2.5rem; }
+      .audience-grid,.resources-grid { grid-template-columns:1fr; }
+      .featured-business-card { grid-template-columns:1fr; padding:2.5rem; gap:2rem; }
+    }
+    @media (max-width:768px) {
+      .business-hero { padding:7rem 1.5rem 3rem; }
+      .audience-section,.resources-section { padding:4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html">Articles</a></li>
+      <li><a href="business.html" class="active">Business</a></li>
+      <li><a href="../tools/index.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn" onclick="window.location.href='../../pages/business.html'">ES</button>
+        <button class="lang-btn active">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="business-hero">
+    <div>
+      <p class="section-tag">For Business · Para Empresas</p>
+      <h1 class="business-hero-title">Finance that<br>actually grows<br><em>your business.</em></h1>
+      <p class="business-hero-sub">Financial content designed for entrepreneurs, SME owners and startup founders. No empty theory — just what you need to make decisions that matter.</p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; opacity:0; animation:fadeUp .9s ease forwards .6s;">
+        <a href="#articles" class="btn-primary">View articles</a>
+        <a href="../tools/index.html" class="btn-outline">Free tools</a>
+      </div>
+    </div>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <span class="metric-big">78%</span>
+        <p class="metric-text">of SMEs experience cash flow problems in their first 3 years.</p>
+        <span class="metric-source">IDB · 2024</span>
+      </div>
+      <div class="hero-metric">
+        <span class="metric-big">62%</span>
+        <p class="metric-text">of startups fail due to financial reasons, not product issues.</p>
+        <span class="metric-source">CB Insights · 2024</span>
+      </div>
+      <div class="hero-metric">
+        <span class="metric-big">3x</span>
+        <p class="metric-text">more likely to succeed with basic financial education.</p>
+        <span class="metric-source">Clear Finance · Research</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="audience-section">
+    <p class="section-tag">Who is this for? · ¿Para quién es?</p>
+    <h2 class="section-title">Built for<br><em>those who build.</em></h2>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <span class="audience-icon">🌱</span>
+        <h3 class="audience-title">Entrepreneurs starting out</h3>
+        <p class="audience-desc">Just launched your business or about to? Learn how to structure your finances from day one: separate accounts, basic cash flow and how not to run out of capital in the first months.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-icon">🏗️</span>
+        <h3 class="audience-title">Growing SME owners</h3>
+        <p class="audience-desc">Your business works but you want to take it to the next level. We cover financing, projections, real margins and how to read your financial statements without being an accountant.</p>
+      </div>
+      <div class="audience-card">
+        <span class="audience-icon">🚀</span>
+        <h3 class="audience-title">Startup founders</h3>
+        <p class="audience-desc">From how to present metrics to investors to when to raise capital and on what terms. The financial language of the startup ecosystem, explained without detours.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="articles" style="padding:5rem 0 0; background:var(--black);">
+    <div style="padding:0 4rem; margin-bottom:2rem;">
+      <p class="section-tag">Featured Article · Artículo Destacado</p>
+    </div>
+    <div style="padding:0 4rem;">
+      <a href="../articles/cash-flow.html" class="featured-business-card">
+        <div>
+          <span class="featured-label">SMEs & Startups · Essential</span>
+          <h2 class="featured-title">Cash flow: the number every entrepreneur must master</h2>
+          <p style="font-size:.88rem; color:rgba(248,246,241,.5); line-height:1.9; margin-bottom:2rem;">A business can be profitable on paper and run out of cash in weeks. Many companies show earnings in their income statement but don't have money to pay their bills. Learn to read, manage and project it.</p>
+          <div class="article-meta" style="margin-bottom:2rem;"><span>10 min read</span><span>April 2026</span><span>Essential</span></div>
+          <span class="read-more">Read article</span>
+        </div>
+        <div>
+          <span class="featured-side-title">What you'll learn in this section</span>
+          <div class="featured-topics">
+            <div class="featured-topic"><span>→</span> How to read and manage your cash flow</div>
+            <div class="featured-topic"><span>→</span> When and how to seek financing</div>
+            <div class="featured-topic"><span>→</span> Basic accounting without being an accountant</div>
+            <div class="featured-topic"><span>→</span> Projections and key metrics (KPIs)</div>
+            <div class="featured-topic"><span>→</span> Capital structure and valuation</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section style="background:var(--black); padding-top:4rem;">
+    <div style="padding:0 4rem; display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; margin-bottom:3rem;">
+      <span class="filter-label">Filter by:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cashflow">Cash Flow</button>
+      <button class="filter-btn" data-filter="financing">Financing</button>
+      <button class="filter-btn" data-filter="accounting">Accounting</button>
+      <button class="filter-btn" data-filter="growth">Growth</button>
+      <button class="filter-btn" data-filter="metrics">Metrics & KPIs</button>
+    </div>
+
+    <div class="divider" style="margin:0 4rem 3rem;"></div>
+
+    <div class="articles-grid" id="articles-grid">
+
+      <a href="../articles/cash-flow.html" class="article-card" data-cat="cashflow">
+        <span class="card-category">Cash Flow</span>
+        <h2 class="card-title">Cash flow: the number every entrepreneur must master</h2>
+        <p class="card-excerpt">A business can be profitable on paper and run out of cash in weeks. Learn to read, manage and project it.</p>
+        <div class="card-meta"><span>10 min read</span><span class="card-meta-dot"></span><span>April 2026</span><span class="card-meta-dot"></span><span>Beginner</span></div>
+      </a>
+
+      <a href="../articles/financial-statements.html" class="article-card" data-cat="accounting">
+        <span class="card-category">Accounting</span>
+        <h2 class="card-title">The 3 financial statements every business owner must understand</h2>
+        <p class="card-excerpt">Income statement, balance sheet and cash flow — the three documents that tell the complete financial story of your business.</p>
+        <div class="card-meta"><span>12 min read</span><span class="card-meta-dot"></span><span>March 2026</span><span class="card-meta-dot"></span><span>Beginner</span></div>
+      </a>
+
+      <a href="../articles/when-to-borrow.html" class="article-card" data-cat="financing">
+        <span class="card-category">Financing</span>
+        <h2 class="card-title">When does it make sense to borrow to grow? The leverage rule</h2>
+        <p class="card-excerpt">Debt isn't good or bad — it's a tool. The key is one question: does the project's return exceed the cost of the loan?</p>
+        <div class="card-meta"><span>9 min read</span><span class="card-meta-dot"></span><span>March 2026</span><span class="card-meta-dot"></span><span>Beginner</span></div>
+      </a>
+
+      <a href="../articles/kpis-business.html" class="article-card" data-cat="metrics">
+        <span class="card-category">Metrics & KPIs</span>
+        <h2 class="card-title">The 7 essential financial KPIs for your SME</h2>
+        <p class="card-excerpt">Gross margin, EBITDA, current ratio, burn rate... The indicators that distinguish businesses that scale from those that merely survive.</p>
+        <div class="card-meta"><span>11 min read</span><span class="card-meta-dot"></span><span>April 2026</span><span class="card-meta-dot"></span><span>Intermediate</span></div>
+      </a>
+
+      <a href="../articles/financial-projections.html" class="article-card" data-cat="growth">
+        <span class="card-category">Growth</span>
+        <h2 class="card-title">How to build realistic financial projections for your startup or SME</h2>
+        <p class="card-excerpt">Projections aren't predictions — they're structured hypotheses. Learn to build them, use them and update them when reality diverges.</p>
+        <div class="card-meta"><span>12 min read</span><span class="card-meta-dot"></span><span>April 2026</span><span class="card-meta-dot"></span><span>Intermediate</span></div>
+      </a>
+
+      <div class="article-card" style="background:rgba(184,154,90,.03); border:1px solid rgba(184,154,90,.12); cursor:default;" data-cat="financing">
+        <span class="card-category" style="color:var(--muted);">Coming Soon</span>
+        <h2 class="card-title" style="color:rgba(248,246,241,.4);">Bootstrapping, angels, VCs and crowdfunding: the complete financing map for startups</h2>
+        <div class="card-meta"><span style="color:var(--muted);">Coming soon</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="resources-section">
+    <p class="section-tag">Useful Resources · Recursos Útiles</p>
+    <h2 class="section-title">Beyond the<br><em>articles.</em></h2>
+    <div class="resources-grid">
+      <a href="../tools/compound.html" class="resource-card">
+        <span class="resource-icon">📊</span>
+        <div><span class="resource-tag">Tool · Herramienta</span><h3 class="resource-title">Compound Interest Calculator</h3><p class="resource-desc">Project the growth of your investment or reinvested profits over time.</p></div>
+      </a>
+      <a href="../tools/roi.html" class="resource-card">
+        <span class="resource-icon">📉</span>
+        <div><span class="resource-tag">Tool · Herramienta</span><h3 class="resource-title">ROI Calculator</h3><p class="resource-desc">Evaluate whether an investment or project within your business is truly worth it.</p></div>
+      </a>
+      <a href="../tools/goals.html" class="resource-card">
+        <span class="resource-icon">🎯</span>
+        <div><span class="resource-tag">Tool · Herramienta</span><h3 class="resource-title">Financial Goals Planner</h3><p class="resource-desc">Calculate how much you need to generate or save to reach a specific business goal.</p></div>
+      </a>
+      <a href="blog.html" class="resource-card">
+        <span class="resource-icon">📚</span>
+        <div><span class="resource-tag">Articles · Artículos</span><h3 class="resource-title">Personal Finance Section</h3><p class="resource-desc">Because a great entrepreneur also manages their personal finances well. Separating business and personal finances is key.</p></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><a href="../index.html" class="footer-logo">Clear <span>Finance</span></a><p class="footer-about">Honest, rigorous and accessible financial education for individuals, families and entrepreneurs.</p></div>
+      <div>
+        <span class="footer-col-title">For Business</span>
+        <ul class="footer-links">
+          <li><a href="business.html?cat=cashflow">Cash Flow</a></li>
+          <li><a href="business.html?cat=financing">Financing</a></li>
+          <li><a href="business.html?cat=accounting">Accounting</a></li>
+          <li><a href="business.html?cat=metrics">Metrics & KPIs</a></li>
+          <li><a href="business.html?cat=growth">Growth</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Tools</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Compound Interest</a></li>
+          <li><a href="../tools/roi.html">ROI</a></li>
+          <li><a href="../tools/goals.html">Savings Goals</a></li>
+          <li><a href="../tools/index.html">All tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="blog.html">Personal Finance</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="../index.html#newsletter">Newsletter</a></li>
+          <li><a href="../../pages/business.html">Versión en español</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · All rights reserved</p>
+      <div class="footer-social"><a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.article-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => { card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none'; });
+      });
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    const cat = urlParams.get('cat');
+    if (cat) { const t = document.querySelector(`.filter-btn[data-filter="${cat}"]`); if (t) t.click(); }
+  </script>
+
+</body>
+</html>

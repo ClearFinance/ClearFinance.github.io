@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- CAMBIAR: descripción SEO del artículo (150-160 caracteres) -->
+  <meta name="description" content="[Descripción del artículo para SEO]"/>
+  <!-- CAMBIAR: título del artículo -->
+  <title>[Título del artículo] — Clear Finance</title>
+  <link rel="stylesheet" href="../../assets/css/global.css"/>
+  <link rel="stylesheet" href="../../assets/css/blog.css"/>
+</head>
+<body>
+
+  <div class="reading-progress" id="reading-progress"></div>
+
+  <nav>
+    <a href="../../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../../pages/blog.html">Artículos</a></li>
+      <li><a href="../../pages/business.html">Negocios</a></li>
+      <li><a href="../../tools/index.html">Herramientas</a></li>
+      <li><a href="../../pages/about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <article class="article-page">
+    <header class="article-header">
+      <div class="article-header-bg"></div>
+
+      <nav class="article-breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html">Inicio</a>
+        <span>›</span>
+        <a href="../../pages/blog.html">Artículos</a>
+        <span>›</span>
+        <a href="../../pages/blog.html?cat=CATEGORIA">Nombre Categoría</a>
+      </nav>
+
+      <span class="article-category-tag">Categoría · Category</span>
+
+      <h1 class="article-main-title">
+        Primera parte del título,<br>
+        <em>parte destacada en dorado.</em>
+      </h1>
+
+      <p class="article-lead">
+        Párrafo de entrada — 2-3 oraciones que enganchan. No empieces con una definición; empieza con el problema o la idea central que hace interesante el tema.
+      </p>
+
+      <div class="article-info">
+        <span class="article-info-item">
+          <span class="info-icon">⏱</span> XX min de lectura
+        </span>
+        <span class="article-info-item">
+          <span class="info-icon">📅</span> Mes AAAA
+        </span>
+        <span class="article-info-item">
+          <span class="info-icon">🎯</span>
+          <span class="level-badge principiante">Principiante</span>
+        </span>
+        <span class="article-info-item">
+          <button class="share-btn" id="share-btn" onclick="copyLink()">
+            <span>⬡</span> Compartir
+          </button>
+        </span>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <!-- Tabla de contenidos -->
+      <div class="toc">
+        <span class="toc-label">En este artículo</span>
+        <ul class="toc-list">
+          <li><a href="#seccion-1">Primera sección</a></li>
+          <li><a href="#seccion-2">Segunda sección</a></li>
+          <li><a href="#conclusion">Conclusión</a></li>
+        </ul>
+      </div>
+
+      <h2 id="seccion-1">Título de sección</h2>
+      <p>Párrafo. Para citar una fuente, añade superíndice al final de la afirmación.<sup>1</sup></p>
+
+      <div class="key-box">
+        <span class="key-box-label">Punto clave · Key Takeaway</span>
+        <p>El concepto más importante de esta sección en 2-3 oraciones.<sup>2</sup></p>
+      </div>
+
+      <h2 id="seccion-2">Segunda sección</h2>
+      <p>Párrafo...</p>
+
+      <div class="data-highlight">
+        <div class="data-highlight-item">
+          <span class="data-highlight-num">XX%</span>
+          <span class="data-highlight-label">Descripción<br>del dato</span>
+        </div>
+        <div class="data-highlight-item">
+          <span class="data-highlight-num">$XX</span>
+          <span class="data-highlight-label">Descripción<br>del dato</span>
+        </div>
+      </div>
+
+      <blockquote>
+        <p>"Cita relevante." — Autor, <em>Título del libro</em> (Año)</p>
+      </blockquote>
+
+      <h2 id="conclusion">Conclusión</h2>
+      <p>Cierre del artículo — qué debería hacer el lector con lo aprendido.</p>
+
+      <div class="key-box">
+        <span class="key-box-label">Resumen · Key Takeaways</span>
+        <p>Los 3-5 puntos más importantes. Quien solo lea esto debe llevarse el mensaje central.</p>
+      </div>
+
+      <p class="calc-note">Este artículo tiene fines educativos únicamente y no constituye asesoramiento financiero, de inversión, contable o legal personalizado. Consulta con un profesional certificado antes de tomar decisiones financieras importantes.</p>
+
+      <!-- NOTAS AL PIE -->
+      <div class="footnotes">
+        <span class="footnotes-title">Notas</span>
+        <div class="footnote-item">
+          <span class="footnote-num">1</span>
+          <p class="footnote-text">Apellido, N. (Año). <em>Título.</em> Editorial. <a href="#">URL</a></p>
+        </div>
+        <div class="footnote-item">
+          <span class="footnote-num">2</span>
+          <p class="footnote-text">Organismo. (Año). <em>Título del informe.</em> Institución. <a href="#">https://...</a></p>
+        </div>
+      </div>
+
+      <!-- FUENTES CONSULTADAS -->
+      <div class="sources-section">
+        <span class="sources-title">Fuentes consultadas · Sources</span>
+        <div class="sources-grid">
+
+          <a href="#" class="source-card source-card-link" target="_blank" rel="noopener">
+            <span class="source-type-icon">📚</span>
+            <div class="source-info">
+              <span class="source-type-label">Libro</span>
+              <p class="source-title">Título del libro</p>
+              <span class="source-meta">Autor · Año · Editorial</span>
+            </div>
+          </a>
+
+          <a href="#" class="source-card source-card-link" target="_blank" rel="noopener">
+            <span class="source-type-icon">🏛</span>
+            <div class="source-info">
+              <span class="source-type-label">Organismo internacional</span>
+              <p class="source-title">Título del informe</p>
+              <span class="source-meta">BID / FMI / Banco Mundial · Año</span>
+            </div>
+          </a>
+
+          <a href="#" class="source-card source-card-link" target="_blank" rel="noopener">
+            <span class="source-type-icon">📄</span>
+            <div class="source-info">
+              <span class="source-type-label">Paper académico</span>
+              <p class="source-title">Título del paper</p>
+              <span class="source-meta">Autores · Año · Revista / SSRN</span>
+            </div>
+          </a>
+
+          <a href="#" class="source-card source-card-link" target="_blank" rel="noopener">
+            <span class="source-type-icon">📰</span>
+            <div class="source-info">
+              <span class="source-type-label">Medio especializado</span>
+              <p class="source-title">Título del artículo</p>
+              <span class="source-meta">Bloomberg / FT / The Economist · Fecha</span>
+            </div>
+          </a>
+
+          <div class="source-card">
+            <span class="source-type-icon">📊</span>
+            <div class="source-info">
+              <span class="source-type-label">Informe / Reporte</span>
+              <p class="source-title">Título del reporte</p>
+              <span class="source-meta">McKinsey / Deloitte / PwC · Año</span>
+            </div>
+          </div>
+
+          <a href="#" class="source-card source-card-link" target="_blank" rel="noopener">
+            <span class="source-type-icon">🏦</span>
+            <div class="source-info">
+              <span class="source-type-label">Banco central / Regulador</span>
+              <p class="source-title">Título del documento</p>
+              <span class="source-meta">Banrep / Banxico / Fed · Año</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ARTÍCULOS RELACIONADOS -->
+  <section class="related-articles">
+    <p class="related-title">También podría interesarte · You might also like</p>
+    <div class="related-grid">
+      <a href="#" class="article-card">
+        <span class="card-category">[Categoría]</span>
+        <h3 class="card-title">[Título artículo relacionado 1]</h3>
+        <div class="card-meta"><span>[X min]</span><span class="card-meta-dot"></span><span>[Nivel]</span></div>
+      </a>
+      <a href="#" class="article-card">
+        <span class="card-category">[Categoría]</span>
+        <h3 class="card-title">[Título artículo relacionado 2]</h3>
+        <div class="card-meta"><span>[X min]</span><span class="card-meta-dot"></span><span>[Nivel]</span></div>
+      </a>
+      <a href="#" class="article-card">
+        <span class="card-category">[Categoría]</span>
+        <h3 class="card-title">[Título artículo relacionado 3]</h3>
+        <div class="card-meta"><span>[X min]</span><span class="card-meta-dot"></span><span>[Nivel]</span></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Categorías</span>
+        <ul class="footer-links">
+          <li><a href="../../pages/blog.html?cat=personal">Finanzas Personales</a></li>
+          <li><a href="../../pages/blog.html?cat=inversiones">Inversiones</a></li>
+          <li><a href="../../pages/blog.html?cat=economia">Economía Global</a></li>
+          <li><a href="../../pages/blog.html?cat=educacion">Educación Financiera</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../../tools/goals.html">Metas de Ahorro</a></li>
+          <li><a href="../../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="../../pages/blog.html">Todos los artículos</a></li>
+          <li><a href="../../pages/about.html">Sobre nosotros</a></li>
+          <li><a href="../../index.html#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    const progressBar = document.getElementById('reading-progress');
+    window.addEventListener('scroll', () => {
+      const article = document.querySelector('.article-body');
+      if (!article) return;
+      const progress = Math.min(Math.max(
+        (window.scrollY - article.offsetTop + window.innerHeight * 0.3) / article.offsetHeight * 100, 0), 100);
+      progressBar.style.width = progress + '%';
+    });
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById('share-btn');
+        btn.classList.add('copied');
+        btn.innerHTML = '<span>✓</span> ¡Copiado!';
+        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<span>⬡</span> Compartir'; }, 2500);
+      });
+    }
+
+    document.querySelectorAll('.toc-list a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) window.scrollTo({ top: target.offsetTop - 90, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

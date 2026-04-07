@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Sobre Clear Finance — Educación financiera honesta, construida desde la academia y pensada para la vida real."/>
+  <title>Sobre Nosotros — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <style>
+    .about-page { padding-top: var(--nav-height); }
+    .about-hero { padding: 7rem 4rem 5rem; position: relative; overflow: hidden; }
+    .about-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 70% 50%, rgba(184,154,90,0.06) 0%, transparent 70%); pointer-events:none; }
+    .about-hero-title { font-family:var(--serif); font-size:clamp(3rem,6vw,5.5rem); font-weight:300; line-height:1.05; max-width:700px; margin-bottom:1.5rem; opacity:0; animation:fadeUp .9s ease forwards .2s; }
+    .about-hero-title em { font-style:italic; color:var(--gold-light); }
+    .about-hero-sub { font-size:0.95rem; color:rgba(248,246,241,.5); max-width:460px; line-height:1.9; opacity:0; animation:fadeUp .9s ease forwards .4s; }
+
+    .about-content { max-width:1100px; margin:0 auto; padding:5rem 4rem; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+    .about-main h2 { font-family:var(--serif); font-size:1.9rem; font-weight:300; margin:2.5rem 0 1.2rem; }
+    .about-main h2:first-child { margin-top:0; }
+    .about-main p { font-size:0.95rem; color:rgba(248,246,241,.65); line-height:2; margin-bottom:1.3rem; }
+
+    .about-sidebar { display:flex; flex-direction:column; gap:2rem; }
+    .sidebar-card { background:var(--dark); padding:2.5rem; border:1px solid rgba(184,154,90,0.12); position:relative; }
+    .sidebar-card-tag { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; display:block; }
+    .sidebar-card-title { font-family:var(--serif); font-size:1.3rem; font-weight:300; margin-bottom:0.8rem; }
+    .sidebar-card-text { font-size:0.85rem; color:rgba(248,246,241,.5); line-height:1.9; }
+
+    .values-grid { background:var(--dark); padding:5rem 4rem; }
+    .values-grid-inner { max-width:1100px; margin:0 auto; }
+    .values-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5px; background:rgba(184,154,90,0.1); margin-top:3rem; }
+    .value-card { background:var(--dark); padding:2.5rem 2rem; }
+    .value-num { font-family:var(--serif); font-size:2.5rem; font-weight:300; color:rgba(184,154,90,0.2); display:block; line-height:1; margin-bottom:1rem; }
+    .value-title { font-family:var(--serif); font-size:1.2rem; font-weight:300; margin-bottom:0.8rem; }
+    .value-desc { font-size:0.83rem; color:rgba(248,246,241,.45); line-height:1.85; }
+
+    .contact-section { padding:5rem 4rem; max-width:1100px; margin:0 auto; }
+    .contact-section h2 { font-family:var(--serif); font-size:2rem; font-weight:300; margin-bottom:1rem; }
+    .contact-section p { font-size:0.92rem; color:rgba(248,246,241,.6); line-height:1.9; max-width:500px; margin-bottom:2rem; }
+    .contact-email { font-family:var(--mono); font-size:0.9rem; color:var(--gold); letter-spacing:0.05em; }
+
+    @media (max-width:1024px) {
+      .about-content { grid-template-columns:1fr; gap:3rem; padding:4rem 2.5rem; }
+      .about-hero, .values-grid, .contact-section { padding:4rem 2.5rem; }
+    }
+    @media (max-width:768px) {
+      .about-hero, .values-grid, .contact-section { padding:3rem 1.5rem; }
+      .about-content { padding:3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html">Artículos</a></li>
+      <li><a href="business.html">Negocios</a></li>
+      <li><a href="../tools/index.html">Herramientas</a></li>
+      <li><a href="about.html" class="active">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn" onclick="window.location.href='../en/pages/about.html'">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="about-page">
+
+    <div class="about-hero">
+      <p class="section-tag">Sobre nosotros · About Clear Finance</p>
+      <h1 class="about-hero-title">Finanzas claras<br>para <em>todos.</em></h1>
+      <p class="about-hero-sub">Clear Finance nació con una misión simple: hacer que la educación financiera sea accesible, honesta y útil para cualquier persona, sin importar su punto de partida.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="about-content">
+      <div class="about-main">
+        <h2>¿Por qué existe Clear Finance?</h2>
+        <p>Demasiadas personas toman decisiones críticas sobre su dinero — comprar una casa, invertir, endeudarse, emprender — con información incompleta, confusa o directamente diseñada para beneficiar a quien la proporciona.</p>
+        <p>La educación financiera de calidad existe, pero suele estar detrás de cursos caros, libros técnicos o asesores con conflictos de interés. Clear Finance existe para cambiar eso.</p>
+
+        <h2>¿Qué nos hace diferentes?</h2>
+        <p>Este blog está construido desde la academia — con formación en Administración de Empresas y Finanzas & Negocios Internacionales — pero pensado para la vida real. No escribimos para impresionar con terminología compleja. Escribimos para que entiendas, apliques y recuerdes.</p>
+        <p>No tenemos productos financieros que vender. No cobramos comisiones. No tenemos acuerdos con bancos ni fondos de inversión. Eso nos da algo valioso: libertad para decirte la verdad.</p>
+
+        <h2>¿A quién va dirigido?</h2>
+        <p>A quien quiera aprender, sin importar desde dónde parte. Tenemos contenido para quien acaba de recibir su primer sueldo y no sabe qué hacer con él, para el emprendedor que necesita entender su flujo de caja, y para el inversor intermedio que quiere afinar su estrategia.</p>
+        <p>Y todo disponible en español e inglés, porque la claridad financiera no debería tener barreras de idioma.</p>
+      </div>
+
+      <div class="about-sidebar">
+        <div class="sidebar-card">
+          <span class="sidebar-card-tag">Nuestra filosofía · Our Philosophy</span>
+          <h3 class="sidebar-card-title">"Las finanzas no son complicadas. Son mal explicadas."</h3>
+          <p class="sidebar-card-text">Creemos que cualquier concepto financiero puede explicarse de manera clara y accesible. Si un artículo nuestro te confunde, el problema es nuestro, no tuyo.</p>
+        </div>
+
+        <div class="sidebar-card">
+          <span class="sidebar-card-tag">Transparencia · Transparency</span>
+          <h3 class="sidebar-card-title">Cómo nos financiamos</h3>
+          <p class="sidebar-card-text">Clear Finance se sostiene mediante publicidad de Google Ads. No tenemos sponsors editoriales ni acuerdos de afiliados que influyan en nuestro contenido. Lo que lees es lo que creemos.</p>
+        </div>
+
+        <div class="sidebar-card">
+          <span class="sidebar-card-tag">Formación · Background</span>
+          <h3 class="sidebar-card-title">Construido desde la academia</h3>
+          <p class="sidebar-card-text">Administración de Empresas · Finanzas & Negocios Internacionales · Economía Internacional · Econometría · Gestión Estratégica · Formación continua en mercados y finanzas aplicadas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="values-grid">
+      <div class="values-grid-inner">
+        <p class="section-tag">Nuestros principios · Our Principles</p>
+        <h2 class="section-title">Lo que guía<br><em>cada artículo.</em></h2>
+        <div class="values-cards">
+          <div class="value-card">
+            <span class="value-num">01</span>
+            <h3 class="value-title">Claridad ante todo</h3>
+            <p class="value-desc">Si no puedes explicarlo de forma simple, es que no lo entiendes del todo. Nos exigimos ese estándar en cada publicación.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">02</span>
+            <h3 class="value-title">Honestidad sin filtros</h3>
+            <p class="value-desc">No hay estrategia perfecta, no hay inversión sin riesgo. Decimos lo bueno y lo malo de cada enfoque.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">03</span>
+            <h3 class="value-title">Rigor académico</h3>
+            <p class="value-desc">Nuestro contenido está respaldado por formación formal y fuentes verificables. No publicamos lo que "suena bien".</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">04</span>
+            <h3 class="value-title">Accesibilidad real</h3>
+            <p class="value-desc">Todo gratuito, en dos idiomas, sin registro. La educación financiera no debería tener barreras de entrada.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="contact-section" id="contact">
+      <p class="section-tag">Contacto · Contact</p>
+      <h2>¿Tienes una pregunta<br>o sugerencia?</h2>
+      <p>Nos encanta escuchar a nuestra comunidad. Si tienes una pregunta sobre un artículo, una sugerencia de tema o simplemente quieres decir hola, escríbenos.</p>
+      <a href="mailto:hola@clearfinance.com" class="contact-email">hola@clearfinance.com</a>
+      <br><br>
+      <p style="font-size:0.82rem; color:rgba(248,246,241,.35);">Nota: Clear Finance ofrece contenido educativo, no asesoramiento financiero personalizado. Para decisiones de inversión complejas, consulta con un profesional certificado.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Explorar</span>
+        <ul class="footer-links">
+          <li><a href="blog.html">Todos los artículos</a></li>
+          <li><a href="../tools/index.html">Herramientas</a></li>
+          <li><a href="about.html">Sobre nosotros</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../tools/mortgage.html">Hipoteca</a></li>
+          <li><a href="../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="../index.html#newsletter">Newsletter</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  </script>
+</body>
+</html>

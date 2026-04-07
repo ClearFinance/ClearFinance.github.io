@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Todos los artículos de Clear Finance — Finanzas personales, inversiones, economía global y educación financiera."/>
+  <title>Artículos — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <link rel="stylesheet" href="../assets/css/blog.css"/>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html" class="active">Artículos</a></li>
+      <li><a href="business.html">Negocios</a></li>
+      <li><a href="../tools/index.html">Herramientas</a></li>
+      <li><a href="about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn" onclick="window.location.href='../en/pages/blog.html'">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="blog-hero">
+    <p class="section-tag">Todos los artículos · All Articles</p>
+    <h1 class="blog-hero-title">Conocimiento que<br><em>transforma decisiones.</em></h1>
+    <p class="blog-hero-sub">Explora nuestro contenido por categoría o léelo todo. Cada artículo está escrito para que lo entiendas, lo apliques y lo recuerdes.</p>
+  </div>
+
+  <div class="filters">
+    <span class="filter-label">Filtrar por:</span>
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="personal">Finanzas Personales</button>
+    <button class="filter-btn" data-filter="inversiones">Inversiones</button>
+    <button class="filter-btn" data-filter="economia">Economía Global</button>
+    <button class="filter-btn" data-filter="educacion">Educación Financiera</button>
+  </div>
+
+  <div class="divider" style="margin: 0 4rem 3rem;"></div>
+
+  <div class="articles-grid" id="articles-grid">
+
+    <a href="../articles/es/portafolio-desde-cero.html" class="article-card featured-card" data-cat="inversiones">
+      <span class="card-featured">Destacado</span>
+      <span class="card-category">Inversiones</span>
+      <h2 class="card-title">Cómo construir un portafolio de inversión desde cero con menos de $500</h2>
+      <p class="card-excerpt">La mayor mentira del mundo financiero es que necesitas mucho dinero para empezar a invertir. Esta guía paso a paso demuestra que no es así.</p>
+      <div class="card-meta">
+        <span>13 min de lectura</span>
+        <span class="card-meta-dot"></span>
+        <span>Abril 2026</span>
+        <span class="card-meta-dot"></span>
+        <span>Principiante</span>
+      </div>
+    </a>
+
+    <a href="../articles/es/regla-50-30-20.html" class="article-card" data-cat="personal">
+      <span class="card-category">Finanzas Personales</span>
+      <h2 class="card-title">La regla 50/30/20 y por qué funciona (o no) para ti</h2>
+      <p class="card-excerpt">El método de presupuesto más popular del mundo — y también uno de los más malentendidos. Entendemos su lógica, sus límites y cómo adaptarlo.</p>
+      <div class="card-meta">
+        <span>8 min de lectura</span>
+        <span class="card-meta-dot"></span>
+        <span>Abril 2026</span>
+        <span class="card-meta-dot"></span>
+        <span>Principiante</span>
+      </div>
+    </a>
+
+    <a href="../articles/es/inflacion-2025.html" class="article-card" data-cat="economia">
+      <span class="card-category">Economía Global</span>
+      <h2 class="card-title">Inflación en 2025: qué esperar y cómo proteger tus ahorros</h2>
+      <p class="card-excerpt">La inflación no es solo un número en las noticias — es un impuesto silencioso que erosiona tu poder adquisitivo cada mes.</p>
+      <div class="card-meta">
+        <span>12 min de lectura</span>
+        <span class="card-meta-dot"></span>
+        <span>Marzo 2026</span>
+        <span class="card-meta-dot"></span>
+        <span>Intermedio</span>
+      </div>
+    </a>
+
+    <a href="../articles/es/interes-compuesto.html" class="article-card" data-cat="educacion">
+      <span class="card-category">Educación Financiera</span>
+      <h2 class="card-title">El interés compuesto: por qué el tiempo es tu activo más valioso</h2>
+      <p class="card-excerpt">Su poder real solo se entiende con números en la mano. Con ejemplos concretos y la lógica detrás del principio más poderoso de las finanzas.</p>
+      <div class="card-meta">
+        <span>9 min de lectura</span>
+        <span class="card-meta-dot"></span>
+        <span>Marzo 2026</span>
+        <span class="card-meta-dot"></span>
+        <span>Principiante</span>
+      </div>
+    </a>
+
+    <a href="../articles/es/etfs-para-principiantes.html" class="article-card" data-cat="inversiones">
+      <span class="card-category">Inversiones</span>
+      <h2 class="card-title">ETFs para principiantes: qué son, cómo funcionan y cómo elegir el primero</h2>
+      <p class="card-excerpt">Los fondos cotizados llevan décadas siendo el instrumento favorito de los mejores inversores del mundo — y son perfectamente accesibles para quien empieza.</p>
+      <div class="card-meta">
+        <span>11 min de lectura</span>
+        <span class="card-meta-dot"></span>
+        <span>Abril 2026</span>
+        <span class="card-meta-dot"></span>
+        <span>Principiante</span>
+      </div>
+    </a>
+
+    <!-- Teaser hacia la sección de negocios -->
+    <a href="business.html" class="article-card" data-cat="none" style="background:rgba(184,154,90,0.04); border:1px solid rgba(184,154,90,0.15);">
+      <span class="card-category" style="color:var(--gold-light);">Para Empresas · For Business</span>
+      <h2 class="card-title" style="color:var(--gold-light);">¿Tienes un negocio o startup?</h2>
+      <p class="card-excerpt">Tenemos una sección completa dedicada a emprendedores: flujo de caja, estados financieros, KPIs, proyecciones y mucho más.</p>
+      <div class="card-meta">
+        <span>Explorar sección Negocios →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Categorías</span>
+        <ul class="footer-links">
+          <li><a href="blog.html?cat=personal">Finanzas Personales</a></li>
+          <li><a href="blog.html?cat=inversiones">Inversiones</a></li>
+          <li><a href="blog.html?cat=economia">Economía Global</a></li>
+          <li><a href="blog.html?cat=educacion">Educación Financiera</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../tools/mortgage.html">Hipoteca</a></li>
+          <li><a href="../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="about.html">Sobre nosotros</a></li>
+          <li><a href="../index.html#newsletter">Newsletter</a></li>
+          <li><a href="business.html">Para Empresas</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.article-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const cat = urlParams.get('cat');
+    if (cat) {
+      const targetBtn = document.querySelector(`.filter-btn[data-filter="${cat}"]`);
+      if (targetBtn) targetBtn.click();
+    }
+  </script>
+
+</body>
+</html>
