@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clearfinance.github.io/sitemap.xml
