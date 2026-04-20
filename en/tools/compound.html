@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="E9WRcKJHtC8UUgmZKm2e1vwb1-cq8TdKOCISaaK0OYE" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadora de interés compuesto gratuita — visualiza cómo crece tu dinero con el tiempo considerando aportes mensuales y tasa de retorno."/>
+  <title>Compound Interest Calculator — Clear Finance</title>
+  <link rel="stylesheet" href="../../assets/css/global.css"/>
+  <link rel="stylesheet" href="../../assets/css/tools.css"/>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pages/blog.html">Articles</a></li>
+      <li><a href="../pages/business.html">Business</a></li>
+      <li><a href="index.html" class="active">Tools</a></li>
+      <li><a href="../pages/about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn" onclick="window.location.href='../../tools/compound.html'">ES</button>
+        <button class="lang-btn active">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="calculator-page">
+
+    <div class="calc-header">
+      <nav class="calc-breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>›</span>
+        <a href="index.html">Tools</a>
+        <span>›</span>
+        <span>Compound Interest</span>
+      </nav>
+      <h1 class="calc-title">Compound<br><em>Interest Calculator</em></h1>
+      <p class="calc-description">Visualize the power of time over your money. Enter your initial capital, monthly contributions and return rate to see how your investment grows year by year.</p>
+    </div>
+
+    <div class="calc-body">
+
+      <!-- INPUTS -->
+      <div class="calc-inputs">
+        <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Investment parameters</p>
+
+        <div class="input-group">
+          <label class="input-label">Initial capital</label>
+          <span class="input-hint">Money you have available to invest today</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="principal" value="1000000" min="0" step="100000"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Monthly contribution</label>
+          <span class="input-hint">Amount you will add each month (can be 0)</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="monthly" value="200000" min="0" step="50000"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Annual return rate</label>
+          <span class="input-hint">Expected annual return (S&P500 historical avg ≈ 10%)</span>
+          <input type="range" class="calc-range" id="rate-slider" min="1" max="20" step="0.5" value="8"/>
+          <div class="range-labels"><span>1%</span><span id="rate-val">8%</span><span>20%</span></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Investment period</label>
+          <span class="input-hint">Years you will keep the investment</span>
+          <input type="range" class="calc-range" id="years-slider" min="1" max="40" step="1" value="20"/>
+          <div class="range-labels"><span>1 year</span><span id="years-val">20 years</span><span>40 years</span></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Compounding frequency</label>
+          <select class="calc-select" id="frequency">
+            <option value="12">Monthly (recommended)</option>
+            <option value="4">Quarterly</option>
+            <option value="2">Semi-annual</option>
+            <option value="1">Annual</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- RESULTS -->
+      <div class="calc-results">
+        <span class="results-label">Projected result</span>
+
+        <div class="result-main">
+          <span class="result-main-label">Total value at end of period</span>
+          <span class="result-main-value" id="total-value">$0</span>
+        </div>
+
+        <div class="result-row">
+          <span class="result-row-label">Total capital contributed</span>
+          <span class="result-row-value" id="total-contributed">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Interest generated</span>
+          <span class="result-row-value positive" id="total-interest">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Capital multiplier</span>
+          <span class="result-row-value" id="multiplier">0x</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Annual return rate</span>
+          <span class="result-row-value" id="rate-display">0%</span>
+        </div>
+
+        <!-- Barra: capital vs intereses -->
+        <div class="result-bar-container" style="margin-top:2rem;">
+          <div class="result-bar-label">
+            <span>Capital contributed</span>
+            <span>Interest generated</span>
+          </div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill" id="interest-bar" style="width:0%"></div>
+          </div>
+          <div class="result-bar-label" style="margin-top:0.4rem;">
+            <span id="contrib-pct">0%</span>
+            <span id="interest-pct">0%</span>
+          </div>
+        </div>
+
+        <!-- Tabla año por año -->
+        <div style="margin-top:2.5rem;">
+          <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Year-by-year growth</p>
+          <div id="yearly-table" style="max-height:280px; overflow-y:auto; scrollbar-width:thin;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.78rem;">
+              <thead>
+                <tr>
+                  <th style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); padding:0.6rem 0.5rem; text-align:left; border-bottom:1px solid rgba(184,154,90,0.2);">Year</th>
+                  <th style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); padding:0.6rem 0.5rem; text-align:right; border-bottom:1px solid rgba(184,154,90,0.2);">Contributed</th>
+                  <th style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); padding:0.6rem 0.5rem; text-align:right; border-bottom:1px solid rgba(184,154,90,0.2);">Total</th>
+                </tr>
+              </thead>
+              <tbody id="yearly-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="calc-note">For illustrative purposes only. Real returns vary and are not guaranteed. This does not constitute financial advice.</p>
+      </div>
+    </div>
+
+    <!-- EXPLAINER -->
+    <div class="calc-explainer">
+      <h2>How does this calculator work?</h2>
+      <p>Applies the compound interest formula: <strong>FV = PV × (1 + r/n)^(n×t) + PMT × [((1 + r/n)^(n×t) − 1) / (r/n)]</strong>, where PV is initial capital, PMT the monthly contribution, r the annual rate, n the compounding frequency and t the time in years.</p>
+      <p>The result shows exactly how much of your final wealth comes from your own money and how much was generated by compound interest alone. The difference tends to surprise — especially over 20+ year horizons.</p>
+      <p>For context: the S&P 500 has had a historical average return of approximately 10% annually in nominal terms (7% real after inflation). Emerging markets and other assets have different risk/return profiles.</p>
+      <a href="../articles/compound-interest.html" class="read-more" style="margin-top:1rem; display:inline-flex;">Read: Compound interest explained</a>
+    </div>
+
+  </div>
+
+  <!-- Otras herramientas -->
+  <section style="padding:4rem; background:var(--dark); border-top:1px solid rgba(184,154,90,0.1);">
+    <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">More Tools · Más herramientas</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5px; background:rgba(184,154,90,0.1);">
+      <a href="mortgage.html" class="tool-index-card">
+        <span class="tool-card-icon">🏠</span>
+        <h3 class="tool-card-name">Mortgage</h3>
+        <p class="tool-card-desc">Monthly payment and total cost of your loan.</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+      <a href="debt.html" class="tool-index-card">
+        <span class="tool-card-icon">💳</span>
+        <h3 class="tool-card-name">Debt Payoff</h3>
+        <p class="tool-card-desc">Avalanche vs snowball method.</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+      <a href="goals.html" class="tool-index-card">
+        <span class="tool-card-icon">🎯</span>
+        <h3 class="tool-card-name">Savings Goals</h3>
+        <p class="tool-card-desc">How much to save per month?</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+      <a href="roi.html" class="tool-index-card">
+        <span class="tool-card-icon">📉</span>
+        <h3 class="tool-card-name">ROI</h3>
+        <p class="tool-card-desc">Return on your investment.</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Free financial tools to make better decisions.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Tools</span>
+        <ul class="footer-links">
+          <li><a href="compound.html">Interés Compuesto</a></li>
+          <li><a href="mortgage.html">Hipoteca</a></li>
+          <li><a href="debt.html">Liquidación de Deuda</a></li>
+          <li><a href="goals.html">Metas de Ahorro</a></li>
+          <li><a href="roi.html">Rentabilidad (ROI)</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Related articles</span>
+        <ul class="footer-links">
+          <li><a href="../articles/compound-interest.html">Compound interest</a></li>
+          <li><a href="../articles/portfolio-from-scratch.html">Portfolio from scratch</a></li>
+          <li><a href="../articles/etfs-beginners.html">ETFs for beginners</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="../pages/blog.html">Articles</a></li>
+          <li><a href="../pages/business.html">Business</a></li>
+          <li><a href="../pages/about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · All rights reserved</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    // Sliders
+    const rateSlider = document.getElementById('rate-slider');
+    const yearsSlider = document.getElementById('years-slider');
+    rateSlider.addEventListener('input', () => { document.getElementById('rate-val').textContent = rateSlider.value + '%'; calculate(); });
+    yearsSlider.addEventListener('input', () => { document.getElementById('years-val').textContent = yearsSlider.value + ' years'; calculate(); });
+    document.getElementById('principal').addEventListener('input', calculate);
+    document.getElementById('monthly').addEventListener('input', calculate);
+    document.getElementById('frequency').addEventListener('change', calculate);
+
+    function fmt(n) {
+      return '$' + Math.round(n).toLocaleString('es-CO');
+    }
+
+    function calculate() {
+      const P = parseFloat(document.getElementById('principal').value) || 0;
+      const PMT = parseFloat(document.getElementById('monthly').value) || 0;
+      const r = parseFloat(rateSlider.value) / 100;
+      const t = parseInt(yearsSlider.value);
+      const n = parseInt(document.getElementById('frequency').value);
+
+      const rn = r / n;
+      const periods = n * t;
+      const totalMonths = t * 12;
+
+      // Valor futuro capital inicial
+      const fvPrincipal = P * Math.pow(1 + rn, periods);
+
+      // Valor futuro aportes mensuales (convertir a frecuencia)
+      // Primero calculamos mes a mes para la tabla
+      let balance = P;
+      const monthlyRate = r / 12;
+      const rows = [];
+
+      for (let year = 1; year <= t; year++) {
+        for (let m = 1; m <= 12; m++) {
+          balance = balance * (1 + monthlyRate) + PMT;
+        }
+        const contributed = P + PMT * 12 * year;
+        rows.push({ year, balance, contributed });
+      }
+
+      const finalBalance = balance;
+      const totalContributed = P + PMT * totalMonths;
+      const totalInterest = finalBalance - totalContributed;
+      const multiplier = totalContributed > 0 ? finalBalance / totalContributed : 0;
+
+      document.getElementById('total-value').textContent = fmt(finalBalance);
+      document.getElementById('total-contributed').textContent = fmt(totalContributed);
+      document.getElementById('total-interest').textContent = fmt(totalInterest);
+      document.getElementById('multiplier').textContent = multiplier.toFixed(2) + 'x';
+      document.getElementById('rate-display').textContent = rateSlider.value + '% anual';
+
+      const interestPct = finalBalance > 0 ? (totalInterest / finalBalance * 100) : 0;
+      const contribPct = 100 - interestPct;
+      document.getElementById('interest-bar').style.width = interestPct + '%';
+      document.getElementById('contrib-pct').textContent = contribPct.toFixed(0) + '%';
+      document.getElementById('interest-pct').textContent = interestPct.toFixed(0) + '%';
+
+      // Tabla año por año
+      const tbody = document.getElementById('yearly-body');
+      tbody.innerHTML = '';
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="padding:0.55rem 0.5rem; border-bottom:1px solid rgba(248,246,241,0.04); color:rgba(248,246,241,0.5);">Año ${row.year}</td>
+          <td style="padding:0.55rem 0.5rem; border-bottom:1px solid rgba(248,246,241,0.04); text-align:right; color:rgba(248,246,241,0.5);">${fmt(row.contributed)}</td>
+          <td style="padding:0.55rem 0.5rem; border-bottom:1px solid rgba(248,246,241,0.04); text-align:right; color:var(--gold-light); font-family:var(--mono); font-size:0.82rem;">${fmt(row.balance)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Calcular al cargar
+    calculate();
+  </script>
+
+</body>
+</html>

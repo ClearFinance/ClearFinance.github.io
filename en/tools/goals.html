@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="E9WRcKJHtC8UUgmZKm2e1vwb1-cq8TdKOCISaaK0OYE" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadora de metas de ahorro gratuita — descubre cuánto necesitas ahorrar por mes para alcanzar tu objetivo financiero en el plazo que quieras."/>
+  <title>Savings Goals Planner — Clear Finance</title>
+  <link rel="stylesheet" href="../../assets/css/global.css"/>
+  <link rel="stylesheet" href="../../assets/css/tools.css"/>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pages/blog.html">Articles</a></li>
+      <li><a href="../pages/business.html">Business</a></li>
+      <li><a href="index.html" class="active">Tools</a></li>
+      <li><a href="../pages/about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn" onclick="window.location.href='../../tools/goals.html'">ES</button>
+        <button class="lang-btn active">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="calculator-page">
+
+    <div class="calc-header">
+      <nav class="calc-breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>›</span>
+        <a href="index.html">Tools</a>
+        <span>›</span>
+        <span>Savings Goals</span>
+      </nav>
+      <h1 class="calc-title">Savings Goals<br><em>Planner</em></h1>
+      <p class="calc-description">Define your goal, timeline and expected return. Calculate exactly how much you need to save and invest each month to get there.</p>
+    </div>
+
+    <div class="calc-body">
+
+      <div class="calc-inputs">
+        <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Your financial goal</p>
+
+        <div class="input-group">
+          <label class="input-label">What are you saving for?</label>
+          <select class="calc-select" id="goal-type" onchange="updateGoalLabel()">
+            <option value="viaje">Travel or vacation</option>
+            <option value="emergencia">Emergency fund</option>
+            <option value="casa">Home down payment</option>
+            <option value="educacion">Education / graduate school</option>
+            <option value="auto">Vehicle</option>
+            <option value="negocio">Business capital</option>
+            <option value="retiro">Retirement</option>
+            <option value="otro">Other goal</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" id="goal-label">Amount you need</label>
+          <span class="input-hint">How much do you need in total for your goal?</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="goal-amount" value="10000000" min="0" step="500000"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Initial savings available</label>
+          <span class="input-hint">What you already have saved for this goal (can be 0)</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="initial-saving" value="0" min="0" step="100000"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Timeline to reach your goal</label>
+          <input type="range" class="calc-range" id="months-slider" min="3" max="120" step="3" value="24"/>
+          <div class="range-labels"><span>3 meses</span><span id="months-val">24 meses</span><span>10 años</span></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Expected annual return rate</label>
+          <span class="input-hint">0% if keeping money without investing it</span>
+          <input type="range" class="calc-range" id="rate-slider" min="0" max="15" step="0.5" value="5"/>
+          <div class="range-labels"><span>0%</span><span id="rate-val">5%</span><span>15%</span></div>
+        </div>
+
+      </div>
+
+      <div class="calc-results">
+        <span class="results-label">Your savings plan</span>
+
+        <div class="result-main">
+          <span class="result-main-label">Monthly savings needed</span>
+          <span class="result-main-value" id="monthly-saving">$0</span>
+        </div>
+
+        <div class="result-row">
+          <span class="result-row-label">Total goal</span>
+          <span class="result-row-value" id="goal-display">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Initial savings</span>
+          <span class="result-row-value" id="initial-display">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Total monthly contributions</span>
+          <span class="result-row-value" id="total-contributions">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Returns generated</span>
+          <span class="result-row-value positive" id="total-returns">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Selected timeline</span>
+          <span class="result-row-value" id="timeframe-display">—</span>
+        </div>
+
+        <!-- Alternativas de plazo -->
+        <div style="margin-top:2rem;">
+          <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">What if you change the timeline?</p>
+          <div id="alternatives"></div>
+        </div>
+
+        <p class="calc-note">Illustrative calculator. Real returns vary depending on the investment instrument and market conditions.</p>
+      </div>
+    </div>
+
+    <div class="calc-explainer">
+      <h2>How to use this calculator?</h2>
+      <p>Clearly define what you are saving for — that determines the time horizon and the right instrument. An emergency fund (3-6 months of expenses) should be in something liquid and low-risk. A 5+ year goal can assume more risk and potentially higher returns.</p>
+      <p>The return rate depends on where you invest: 0% if keeping cash, 3-6% in term deposits or fixed income instruments, 6-10% historically in equity index funds (with higher volatility). For short-term goals (under 2 years), use low rates.</p>
+      <p>Once you know the monthly amount needed, set it up as an automatic transfer on the day you receive your income — so saving happens before you have the opportunity to spend that money.</p>
+    </div>
+
+  </div>
+
+  <section style="padding:4rem; background:var(--dark); border-top:1px solid rgba(184,154,90,0.1);">
+    <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">More Tools · Más herramientas</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5px; background:rgba(184,154,90,0.1);">
+      <a href="compound.html" class="tool-index-card"><span class="tool-card-icon">📊</span><h3 class="tool-card-name">Interés Compuesto</h3><p class="tool-card-desc">Visualiza el crecimiento de tu inversión.</p><span class="tool-card-link">Usar</span></a>
+      <a href="mortgage.html" class="tool-index-card"><span class="tool-card-icon">🏠</span><h3 class="tool-card-name">Hipoteca</h3><p class="tool-card-desc">Cuota mensual y costo total.</p><span class="tool-card-link">Usar</span></a>
+      <a href="debt.html" class="tool-index-card"><span class="tool-card-icon">💳</span><h3 class="tool-card-name">Liquidación de Deuda</h3><p class="tool-card-desc">Avalancha vs bola de nieve.</p><span class="tool-card-link">Usar</span></a>
+      <a href="roi.html" class="tool-index-card"><span class="tool-card-icon">📉</span><h3 class="tool-card-name">ROI</h3><p class="tool-card-desc">Rentabilidad de tu inversión.</p><span class="tool-card-link">Usar</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><a href="../index.html" class="footer-logo">Clear <span>Finance</span></a><p class="footer-about">Free financial tools to make better decisions.</p></div>
+      <div><span class="footer-col-title">Tools</span><ul class="footer-links"><li><a href="compound.html">Interés Compuesto</a></li><li><a href="mortgage.html">Hipoteca</a></li><li><a href="debt.html">Liquidación de Deuda</a></li><li><a href="goals.html">Metas de Ahorro</a></li><li><a href="roi.html">Rentabilidad (ROI)</a></li></ul></div>
+      <div><span class="footer-col-title">Articles</span><ul class="footer-links"><li><a href="../articles/compound-interest.html">Interés compuesto</a></li><li><a href="../articles/50-30-20-rule.html">50/30/20 rule</a></li><li><a href="../articles/inflation-2025.html">Inflation in 2025</a></li></ul></div>
+      <div><span class="footer-col-title">Blog</span><ul class="footer-links"><li><a href="../pages/blog.html">Articles</a></li><li><a href="../pages/business.html">Business</a></li><li><a href="../pages/about.html">About</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Clear Finance · All rights reserved</p><div class="footer-social"><a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a></div></div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    document.getElementById('months-slider').addEventListener('input', () => {
+      const m = parseInt(document.getElementById('months-slider').value);
+      const y = Math.floor(m / 12); const mo = m % 12;
+      document.getElementById('months-val').textContent = y > 0 ? `${y} year${y>1?'s':''} ${mo>0?`and ${mo} month${mo>1?'s':''}` : ''}` : `${m} months`;
+      calculate();
+    });
+    document.getElementById('rate-slider').addEventListener('input', () => {
+      document.getElementById('rate-val').textContent = document.getElementById('rate-slider').value + '%';
+      calculate();
+    });
+    document.getElementById('goal-amount').addEventListener('input', calculate);
+    document.getElementById('initial-saving').addEventListener('input', calculate);
+    document.getElementById('goal-type').addEventListener('change', calculate);
+
+    function updateGoalLabel() { calculate(); }
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('es-CO'); }
+
+    function calcMonthlySaving(goal, initial, months, annualRate) {
+      const r = annualRate / 100 / 12;
+      const remaining = goal - initial * Math.pow(1 + r, months);
+      if (r === 0) return remaining / months;
+      return remaining * r / (Math.pow(1 + r, months) - 1);
+    }
+
+    function calculate() {
+      const goal = parseFloat(document.getElementById('goal-amount').value) || 0;
+      const initial = parseFloat(document.getElementById('initial-saving').value) || 0;
+      const months = parseInt(document.getElementById('months-slider').value);
+      const rate = parseFloat(document.getElementById('rate-slider').value);
+
+      const monthly = Math.max(0, calcMonthlySaving(goal, initial, months, rate));
+      const totalContrib = monthly * months;
+      const totalReturns = goal - initial - totalContrib;
+
+      const y = Math.floor(months / 12); const mo = months % 12;
+      const plazo = y > 0 ? `${y} año${y>1?'s':''} ${mo>0?`y ${mo} mes${mo>1?'es':''}` : ''}` : `${months} meses`;
+
+      document.getElementById('monthly-saving').textContent = fmt(monthly);
+      document.getElementById('goal-display').textContent = fmt(goal);
+      document.getElementById('initial-display').textContent = fmt(initial);
+      document.getElementById('total-contributions').textContent = fmt(totalContrib);
+      document.getElementById('total-returns').textContent = fmt(Math.max(0, totalReturns));
+      document.getElementById('timeframe-display').textContent = plazo;
+
+      // Alternativas de plazo
+      const alts = document.getElementById('alternatives');
+      alts.innerHTML = '';
+      const altMonths = [6, 12, 18, 24, 36, 48, 60, 84, 120].filter(m => m !== months).slice(0, 4);
+      altMonths.forEach(m => {
+        const altMonthly = Math.max(0, calcMonthlySaving(goal, initial, m, rate));
+        const yy = Math.floor(m/12); const mm = m%12;
+        const label = yy > 0 ? `${yy} year${yy>1?'s':''} ${mm>0?`${mm}m`:''}` : `${m} months`;
+        const row = document.createElement('div');
+        row.className = 'result-row';
+        row.innerHTML = `<span class="result-row-label">${label}</span><span class="result-row-value" style="font-size:0.85rem;">${fmt(altMonthly)}/mes</span>`;
+        alts.appendChild(row);
+      });
+    }
+
+    calculate();
+  </script>
+
+</body>
+</html>

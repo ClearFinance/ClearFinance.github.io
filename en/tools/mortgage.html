@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="google-site-verification" content="E9WRcKJHtC8UUgmZKm2e1vwb1-cq8TdKOCISaaK0OYE" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadora de hipoteca gratuita — calcula tu cuota mensual, el costo total del crédito y el desglose entre capital e intereses."/>
+  <title>Mortgage Calculator — Clear Finance</title>
+  <link rel="stylesheet" href="../../assets/css/global.css"/>
+  <link rel="stylesheet" href="../../assets/css/tools.css"/>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pages/blog.html">Articles</a></li>
+      <li><a href="../pages/business.html">Business</a></li>
+      <li><a href="index.html" class="active">Tools</a></li>
+      <li><a href="../pages/about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn" onclick="window.location.href='../../tools/mortgage.html'">ES</button>
+        <button class="lang-btn active">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="calculator-page">
+
+    <div class="calc-header">
+      <nav class="calc-breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>›</span>
+        <a href="index.html">Tools</a>
+        <span>›</span>
+        <span>Mortgage</span>
+      </nav>
+      <h1 class="calc-title">Mortgage<br><em>Calculator</em></h1>
+      <p class="calc-description">Calculate your monthly payment, total loan cost and how much you will pay in interest over the term. Compare different scenarios before deciding.</p>
+    </div>
+
+    <div class="calc-body">
+
+      <div class="calc-inputs">
+        <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">Loan details</p>
+
+        <div class="input-group">
+          <label class="input-label">Property value</label>
+          <span class="input-hint">Total price of the property</span>
+          <div class="input-wrapper">
+            <span class="input-prefix">$</span>
+            <input type="number" class="calc-input has-prefix" id="property-value" value="300000000" min="0" step="10000000"/>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Down payment</label>
+          <span class="input-hint">Percentage of property value paid upfront</span>
+          <input type="range" class="calc-range" id="down-slider" min="10" max="50" step="5" value="30"/>
+          <div class="range-labels"><span>10%</span><span id="down-val">30%</span><span>50%</span></div>
+          <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.7rem; color:var(--muted);">Down payment: <span id="down-amount" style="color:var(--gold-light);">$90.000.000</span></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Annual interest rate</label>
+          <span class="input-hint">Effective annual rate of the mortgage</span>
+          <input type="range" class="calc-range" id="rate-slider" min="5" max="25" step="0.5" value="12"/>
+          <div class="range-labels"><span>5%</span><span id="rate-val">12%</span><span>25%</span></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Loan term</label>
+          <input type="range" class="calc-range" id="years-slider" min="5" max="30" step="5" value="20"/>
+          <div class="range-labels"><span>5 years</span><span id="years-val">20 years</span><span>30 years</span></div>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()" style="display:none;"></button>
+      </div>
+
+      <div class="calc-results">
+        <span class="results-label">Loan summary</span>
+
+        <div class="result-main">
+          <span class="result-main-label">Estimated monthly payment</span>
+          <span class="result-main-value" id="monthly-payment">$0</span>
+        </div>
+
+        <div class="result-row">
+          <span class="result-row-label">Loan amount</span>
+          <span class="result-row-value" id="loan-amount">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Total paid to bank</span>
+          <span class="result-row-value" id="total-paid">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Total in interest</span>
+          <span class="result-row-value negative" id="total-interest">$0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-label">Recommended payment / income ratio</span>
+          <span class="result-row-value" id="income-needed">—</span>
+        </div>
+
+        <!-- Barra capital vs intereses -->
+        <div class="result-bar-container" style="margin-top:2rem;">
+          <div class="result-bar-label">
+            <span>Principal</span>
+            <span>Interest</span>
+          </div>
+          <div class="result-bar-track">
+            <div class="result-bar-fill" id="interest-bar" style="width:0%"></div>
+          </div>
+          <div class="result-bar-label" style="margin-top:0.4rem;">
+            <span id="capital-pct">0%</span>
+            <span id="interest-pct">0%</span>
+          </div>
+        </div>
+
+        <!-- Amortización simplificada -->
+        <div style="margin-top:2.5rem;">
+          <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Annual amortization</p>
+          <div style="max-height:280px; overflow-y:auto; scrollbar-width:thin;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.78rem;">
+              <thead>
+                <tr>
+                  <th style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); padding:0.6rem 0.5rem; text-align:left; border-bottom:1px solid rgba(184,154,90,0.2);">Year</th>
+                  <th style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); padding:0.6rem 0.5rem; text-align:right; border-bottom:1px solid rgba(184,154,90,0.2);">Interest paid</th>
+                  <th style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); padding:0.6rem 0.5rem; text-align:right; border-bottom:1px solid rgba(184,154,90,0.2);">Remaining balance</th>
+                </tr>
+              </thead>
+              <tbody id="amort-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="calc-note">Illustrative calculator. The real payment may vary due to insurance, notary costs and other bank charges. Consult your financial institution.</p>
+      </div>
+    </div>
+
+    <div class="calc-explainer">
+      <h2>How is the mortgage payment calculated?</h2>
+      <p>The monthly payment is calculated with the French amortization formula: <strong>C = P × [r(1+r)ⁿ] / [(1+r)ⁿ−1]</strong>, where P is the loan amount, r the monthly rate and n the number of payments. In this system the payment is fixed but the proportion between principal and interest changes — at first you pay more interest, at the end more principal.</p>
+      <p>The general rule is that the monthly payment should not exceed 30% of your net monthly income to avoid compromising your financial stability. Some banks allow up to 40%, but that leaves little margin for unexpected events.</p>
+      <p>Before taking out a mortgage, always compare the Total Financial Cost (TFC) or the real Annual Percentage Rate (APR) that includes all associated costs — not just the nominal rate.</p>
+    </div>
+
+  </div>
+
+  <section style="padding:4rem; background:var(--dark); border-top:1px solid rgba(184,154,90,0.1);">
+    <p style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2rem;">More Tools · Más herramientas</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5px; background:rgba(184,154,90,0.1);">
+      <a href="compound.html" class="tool-index-card">
+        <span class="tool-card-icon">📊</span>
+        <h3 class="tool-card-name">Compound Interest</h3>
+        <p class="tool-card-desc">Visualize how your money grows over time.</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+      <a href="debt.html" class="tool-index-card">
+        <span class="tool-card-icon">💳</span>
+        <h3 class="tool-card-name">Debt Payoff</h3>
+        <p class="tool-card-desc">Avalanche vs snowball method.</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+      <a href="goals.html" class="tool-index-card">
+        <span class="tool-card-icon">🎯</span>
+        <h3 class="tool-card-name">Savings Goals</h3>
+        <p class="tool-card-desc">How much to save per month?</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+      <a href="roi.html" class="tool-index-card">
+        <span class="tool-card-icon">📉</span>
+        <h3 class="tool-card-name">ROI</h3>
+        <p class="tool-card-desc">Return on your investment.</p>
+        <span class="tool-card-link">Use</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Free financial tools to make better decisions.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Tools</span>
+        <ul class="footer-links">
+          <li><a href="compound.html">Interés Compuesto</a></li>
+          <li><a href="mortgage.html">Hipoteca</a></li>
+          <li><a href="debt.html">Liquidación de Deuda</a></li>
+          <li><a href="goals.html">Metas de Ahorro</a></li>
+          <li><a href="roi.html">Rentabilidad (ROI)</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Articles</span>
+        <ul class="footer-links">
+          <li><a href="../articles/inflation-2025.html">Inflation in 2025</a></li>
+          <li><a href="../articles/compound-interest.html">Interés compuesto</a></li>
+          <li><a href="../articles/portfolio-from-scratch.html">Portfolio from scratch</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="../pages/blog.html">Articles</a></li>
+          <li><a href="../pages/business.html">Business</a></li>
+          <li><a href="../pages/about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · All rights reserved</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    const downSlider = document.getElementById('down-slider');
+    const rateSlider = document.getElementById('rate-slider');
+    const yearsSlider = document.getElementById('years-slider');
+
+    function updateDownAmount() {
+      const val = parseFloat(document.getElementById('property-value').value) || 0;
+      const pct = parseInt(downSlider.value);
+      document.getElementById('down-val').textContent = pct + '%';
+      document.getElementById('down-amount').textContent = '$' + Math.round(val * pct / 100).toLocaleString('es-CO');
+    }
+
+    downSlider.addEventListener('input', () => { updateDownAmount(); calculate(); });
+    rateSlider.addEventListener('input', () => { document.getElementById('rate-val').textContent = rateSlider.value + '%'; calculate(); });
+    yearsSlider.addEventListener('input', () => { document.getElementById('years-val').textContent = yearsSlider.value + ' years'; calculate(); });
+    document.getElementById('property-value').addEventListener('input', () => { updateDownAmount(); calculate(); });
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('es-CO'); }
+
+    function calculate() {
+      const propVal = parseFloat(document.getElementById('property-value').value) || 0;
+      const downPct = parseInt(downSlider.value) / 100;
+      const downAmt = propVal * downPct;
+      const P = propVal - downAmt;
+      const annualRate = parseFloat(rateSlider.value) / 100;
+      const r = annualRate / 12;
+      const years = parseInt(yearsSlider.value);
+      const n = years * 12;
+
+      if (P <= 0 || r <= 0 || n <= 0) return;
+
+      const monthly = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const totalPaid = monthly * n;
+      const totalInterest = totalPaid - P;
+      const incomeNeeded = monthly / 0.30;
+
+      document.getElementById('monthly-payment').textContent = fmt(monthly);
+      document.getElementById('loan-amount').textContent = fmt(P);
+      document.getElementById('total-paid').textContent = fmt(totalPaid);
+      document.getElementById('total-interest').textContent = fmt(totalInterest);
+      document.getElementById('income-needed').textContent = fmt(incomeNeeded) + '/mes';
+
+      const interestPct = totalPaid > 0 ? (totalInterest / totalPaid * 100) : 0;
+      document.getElementById('interest-bar').style.width = interestPct + '%';
+      document.getElementById('capital-pct').textContent = (100 - interestPct).toFixed(0) + '%';
+      document.getElementById('interest-pct').textContent = interestPct.toFixed(0) + '%';
+
+      // Amortización anual
+      const tbody = document.getElementById('amort-body');
+      tbody.innerHTML = '';
+      let balance = P;
+      for (let year = 1; year <= years; year++) {
+        let yearlyInterest = 0;
+        for (let m = 0; m < 12; m++) {
+          const interestPay = balance * r;
+          yearlyInterest += interestPay;
+          balance -= (monthly - interestPay);
+        }
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="padding:0.55rem 0.5rem; border-bottom:1px solid rgba(248,246,241,0.04); color:rgba(248,246,241,0.5);">Año ${year}</td>
+          <td style="padding:0.55rem 0.5rem; border-bottom:1px solid rgba(248,246,241,0.04); text-align:right; color:#e07070; font-family:var(--mono); font-size:0.78rem;">${fmt(yearlyInterest)}</td>
+          <td style="padding:0.55rem 0.5rem; border-bottom:1px solid rgba(248,246,241,0.04); text-align:right; color:var(--gold-light); font-family:var(--mono); font-size:0.78rem;">${fmt(Math.max(0, balance))}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    updateDownAmount();
+    calculate();
+  </script>
+
+</body>
+</html>
