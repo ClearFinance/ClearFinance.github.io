@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Glosario financiero de Clear Finance — Definiciones claras de los términos y conceptos financieros más importantes. Bilingüe español e inglés."/>
+  <meta name="keywords" content="glosario financiero, términos financieros, diccionario de finanzas, conceptos financieros, financial glossary"/>
+  <meta name="google-site-verification" content="E9WRcKJHtC8UUgmZKm2e1vwb1-cq8TdKOCISaaK0OYE" />
+  <title>Glosario Financiero — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <style>
+    /* ── HERO ── */
+    .glossary-hero {
+      padding: 10rem 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .glossary-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(184,154,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .glossary-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+    .glossary-hero-title em { font-style: italic; color: var(--gold-light); }
+    .glossary-hero-sub {
+      font-size: 0.95rem;
+      color: rgba(248,246,241,0.5);
+      max-width: 500px;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+
+    /* ── SEARCH BAR ── */
+    .glossary-search-wrap {
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+    .glossary-search {
+      width: 100%;
+      background: rgba(248,246,241,0.05);
+      border: 1px solid rgba(184,154,90,0.3);
+      color: var(--white);
+      padding: 1rem 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .glossary-search::placeholder { color: rgba(248,246,241,0.3); }
+    .glossary-search:focus { border-color: var(--gold); }
+
+    /* ── ALPHABET NAV ── */
+    .alpha-nav {
+      padding: 2rem 4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 1px solid rgba(184,154,90,0.1);
+      position: sticky;
+      top: var(--nav-height);
+      background: var(--dark);
+      z-index: 10;
+    }
+    .alpha-btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 5px 10px;
+      background: transparent;
+      border: 1px solid rgba(184,154,90,0.2);
+      color: rgba(248,246,241,0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .alpha-btn:hover, .alpha-btn.has-terms {
+      border-color: rgba(184,154,90,0.5);
+      color: var(--gold);
+    }
+    .alpha-btn.disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+
+    /* ── GLOSSARY BODY ── */
+    .glossary-body {
+      padding: 0 4rem 6rem;
+      max-width: 1100px;
+    }
+
+    /* ── LETTER SECTION ── */
+    .letter-section {
+      margin-bottom: 3rem;
+      padding-top: 2rem;
+    }
+    .letter-anchor {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(184,154,90,0.2);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .letter-anchor::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(184,154,90,0.12);
+    }
+
+    /* ── TERM CARD ── */
+    .term-card {
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(184,154,90,0.07);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .term-card:last-child { border-bottom: none; }
+    .term-card.hidden { display: none; }
+
+    .term-header { }
+    .term-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .term-name-en {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .term-category {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(248,246,241,0.25);
+      display: inline-block;
+      border: 1px solid rgba(184,154,90,0.15);
+      padding: 2px 8px;
+    }
+
+    .term-body { }
+    .term-def {
+      font-size: 0.9rem;
+      color: rgba(248,246,241,0.7);
+      line-height: 1.85;
+      margin-bottom: 0.8rem;
+    }
+    .term-example {
+      font-size: 0.82rem;
+      color: rgba(248,246,241,0.4);
+      line-height: 1.7;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(184,154,90,0.2);
+      font-style: italic;
+    }
+    .term-related {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .term-related-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(248,246,241,0.25);
+    }
+    .term-related-link {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,154,90,0.3);
+      transition: border-color 0.2s;
+    }
+    .term-related-link:hover { border-color: var(--gold); }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      padding: 4rem;
+      text-align: center;
+      display: none;
+    }
+    .no-results p {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(248,246,241,0.3);
+    }
+
+    /* ── STATS BAR ── */
+    .glossary-stats {
+      padding: 1.5rem 4rem;
+      display: flex;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(184,154,90,0.08);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(248,246,241,0.3);
+    }
+    .glossary-stats span { color: var(--gold); }
+
+    @media (max-width: 1024px) {
+      .glossary-hero, .glossary-body { padding-left: 2.5rem; padding-right: 2.5rem; }
+      .alpha-nav { padding: 1.5rem 2.5rem; }
+      .glossary-stats { padding: 1.5rem 2.5rem; }
+      .term-card { grid-template-columns: 220px 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      .glossary-hero, .glossary-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .alpha-nav { padding: 1rem 1.5rem; position: static; }
+      .glossary-stats { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+      .term-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html">Artículos</a></li>
+      <li><a href="business.html">Negocios</a></li>
+      <li><a href="../tools/index.html">Herramientas</a></li>
+      <li><a href="about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn" onclick="window.location.href='../en/pages/glosario.html'">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="glossary-hero">
+    <p class="section-tag">Glosario Financiero · Financial Glossary</p>
+    <h1 class="glossary-hero-title">Las palabras que<br>el dinero <em>necesita.</em></h1>
+    <p class="glossary-hero-sub">Definiciones claras de los conceptos financieros más importantes — sin jerga innecesaria, sin rodeos. Si lo encuentras en nuestros artículos, lo encuentras aquí.</p>
+    <div class="glossary-search-wrap">
+      <input type="text" class="glossary-search" id="search-input" placeholder="Buscar término... (ej: EBITDA, ETF, interés compuesto)"/>
+    </div>
+  </div>
+
+  <!-- ALPHABET NAV -->
+  <div class="alpha-nav" id="alpha-nav"></div>
+
+  <!-- STATS -->
+  <div class="glossary-stats">
+    <span id="total-count">—</span> términos · <span id="visible-count">—</span> mostrando
+  </div>
+
+  <!-- GLOSSARY BODY -->
+  <div class="glossary-body" id="glossary-body"></div>
+  <div class="no-results" id="no-results">
+    <p>No se encontraron términos para "<span id="search-query"></span>"</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Categorías</span>
+        <ul class="footer-links">
+          <li><a href="blog.html?cat=personal">Finanzas Personales</a></li>
+          <li><a href="blog.html?cat=inversiones">Inversiones</a></li>
+          <li><a href="blog.html?cat=economia">Economía Global</a></li>
+          <li><a href="blog.html?cat=educacion">Educación Financiera</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../tools/mortgage.html">Hipoteca</a></li>
+          <li><a href="../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Blog</span>
+        <ul class="footer-links">
+          <li><a href="about.html">Sobre nosotros</a></li>
+          <li><a href="../index.html#newsletter">Newsletter</a></li>
+          <li><a href="glosario.html" class="active">Glosario</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // ── TERMS DATABASE ──────────────────────────────────────────────────────────
+  const TERMS = [
+
+    // A
+    { letter: 'A', name: 'Activo', en: 'Asset', cat: 'Contabilidad',
+      def: 'Cualquier recurso económico que posee una persona o empresa y que tiene valor monetario. Los activos pueden ser tangibles (inmuebles, maquinaria, efectivo) o intangibles (patentes, marcas, derechos de autor). En el balance general, los activos siempre deben ser iguales a la suma de pasivos más patrimonio.',
+      example: 'Una empresa tiene activos totales de $500 millones: $200M en maquinaria, $150M en inventario, $100M en cuentas por cobrar y $50M en efectivo.',
+      related: [{ text: 'Balance general', href: '../articles/es/contabilidad-basica-pymes.html' }, { text: 'Patrimonio', href: null }] },
+
+    { letter: 'A', name: 'Apalancamiento', en: 'Leverage', cat: 'Finanzas Corporativas',
+      def: 'Uso de deuda o capital prestado para amplificar el potencial retorno de una inversión. El apalancamiento positivo ocurre cuando el retorno del activo supera el costo de la deuda. El negativo, cuando el costo de la deuda supera el retorno generado, destruyendo valor.',
+      example: 'Una empresa invierte $1.000.000 de los cuales $800.000 son deuda al 10% anual. Si el activo genera $150.000 anuales, el ROE sobre los $200.000 propios es del 75% — apalancamiento positivo.',
+      related: [{ text: '¿Cuándo endeudarse?', href: '../articles/es/cuando-pedir-credito.html' }, { text: 'ROE', href: null }] },
+
+    { letter: 'A', name: 'Amortización', en: 'Amortization', cat: 'Crédito',
+      def: 'Proceso de reducción gradual de una deuda mediante pagos periódicos que cubren tanto el capital como los intereses. En contabilidad, también se refiere a la distribución del costo de activos intangibles a lo largo de su vida útil.',
+      example: 'Una hipoteca de $200.000.000 a 20 años se amortiza pagando cuotas mensuales fijas. En los primeros años, la mayor parte de cada cuota paga intereses; hacia el final, la mayor parte paga capital.',
+      related: [{ text: 'Calculadora de hipoteca', href: '../tools/mortgage.html' }, { text: 'Interés compuesto', href: '../articles/es/interes-compuesto.html' }] },
+
+    { letter: 'A', name: 'Asignación de activos', en: 'Asset Allocation', cat: 'Inversiones',
+      def: 'Distribución del capital de inversión entre diferentes clases de activos (acciones, bonos, efectivo, bienes raíces, commodities) con el objetivo de equilibrar riesgo y retorno según el perfil del inversor. Es la decisión de inversión más importante y explica más del 90% de la variabilidad en los retornos a largo plazo.',
+      example: 'Un portafolio moderado puede distribuirse 60% en acciones (vía ETFs), 30% en bonos y 10% en efectivo o activos alternativos.',
+      related: [{ text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }, { text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }] },
+
+    // B
+    { letter: 'B', name: 'Balance general', en: 'Balance Sheet', cat: 'Contabilidad',
+      def: 'Estado financiero que muestra la posición financiera de una empresa en un momento específico. Presenta los activos (lo que tiene), los pasivos (lo que debe) y el patrimonio (lo que pertenece a los dueños). La ecuación fundamental es siempre: Activos = Pasivos + Patrimonio.',
+      example: 'Al 31 de diciembre, una empresa tiene activos de $800M, pasivos de $500M y patrimonio de $300M. La ecuación cuadra: 800 = 500 + 300.',
+      related: [{ text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    { letter: 'B', name: 'Bono', en: 'Bond', cat: 'Inversiones',
+      def: 'Instrumento de deuda mediante el cual un emisor (gobierno o empresa) se compromete a pagar al comprador un monto fijo periódico (cupón) más la devolución del capital al vencimiento. Los bonos son considerados inversiones de menor riesgo que las acciones, pero con menor potencial de retorno.',
+      example: 'Un bono del gobierno colombiano a 10 años con valor nominal de $1.000.000 y cupón del 8% anual paga $80.000 cada año y devuelve el millón al vencimiento.',
+      related: [{ text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }, { text: 'Inflación 2025', href: '../articles/es/inflacion-2025.html' }] },
+
+    { letter: 'B', name: 'Burn rate', en: 'Burn Rate', cat: 'Startups',
+      def: 'Velocidad a la que una empresa, generalmente una startup pre-rentable, consume su efectivo disponible. Se mide en dinero gastado por mes. Es uno de los indicadores de supervivencia más críticos para empresas en etapa temprana.',
+      example: 'Una startup con $500.000 en caja y un burn rate de $50.000 mensuales tiene 10 meses de runway antes de quedarse sin efectivo.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }, { text: 'Flujo de caja', href: '../articles/es/flujo-de-caja.html' }] },
+
+    // C
+    { letter: 'C', name: 'CAGR', en: 'CAGR (Compound Annual Growth Rate)', cat: 'Inversiones',
+      def: 'Tasa de Crecimiento Anual Compuesta. Representa la tasa constante a la que una inversión habría crecido cada año para llegar de su valor inicial al valor final en un período dado. Es la métrica correcta para comparar inversiones de distinto plazo porque anualiza el retorno.',
+      example: 'Una inversión que pasó de $1.000.000 a $1.800.000 en 4 años tiene un CAGR del 15.8% anual. Calculado: (1.800.000/1.000.000)^(1/4) − 1 = 0.158.',
+      related: [{ text: 'Calculadora ROI', href: '../tools/roi.html' }, { text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }] },
+
+    { letter: 'C', name: 'Capital de trabajo', en: 'Working Capital', cat: 'Finanzas Corporativas',
+      def: 'Diferencia entre los activos corrientes y los pasivos corrientes de una empresa. Representa los recursos disponibles para financiar las operaciones diarias. Un capital de trabajo positivo indica que la empresa puede cubrir sus obligaciones de corto plazo con sus activos líquidos.',
+      example: 'Una empresa con activos corrientes de $300M (caja, inventario, cuentas por cobrar) y pasivos corrientes de $180M tiene un capital de trabajo de $120M.',
+      related: [{ text: 'Flujo de caja', href: '../articles/es/flujo-de-caja.html' }, { text: 'Razón corriente', href: null }] },
+
+    { letter: 'C', name: 'Ciclo de conversión de efectivo', en: 'Cash Conversion Cycle', cat: 'Finanzas Corporativas',
+      def: 'Número de días que tarda una empresa en convertir su inversión en inventario y operaciones en efectivo cobrado de sus clientes. Se calcula como: Días de inventario + Días de cuentas por cobrar − Días de cuentas por pagar. Un ciclo más corto indica mayor eficiencia operativa.',
+      example: 'Una empresa con 45 días de inventario, 30 días de cobro y 20 días de pago a proveedores tiene un CCE de 55 días.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }, { text: 'Flujo de caja', href: '../articles/es/flujo-de-caja.html' }] },
+
+    { letter: 'C', name: 'Cupón', en: 'Coupon', cat: 'Renta Fija',
+      def: 'Pago de intereses periódico que un bono realiza a su tenedor. Se expresa como porcentaje del valor nominal del bono y se paga generalmente de forma semestral o anual. El nombre proviene de los bonos físicos históricos que tenían cupones recortables.',
+      example: 'Un bono con valor nominal de $1.000 y cupón del 6% anual paga $60 al año (o $30 cada seis meses).',
+      related: [{ text: 'Bono', href: null }, { text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    // D
+    { letter: 'D', name: 'Depreciación', en: 'Depreciation', cat: 'Contabilidad',
+      def: 'Reducción gradual del valor en libros de un activo tangible a lo largo de su vida útil. Representa el desgaste o agotamiento del activo con el tiempo y se registra como gasto en el estado de resultados, aunque no implica un movimiento real de efectivo.',
+      example: 'Una maquinaria comprada en $100.000.000 con vida útil de 10 años se deprecia $10.000.000 por año por el método lineal.',
+      related: [{ text: 'EBITDA', href: null }, { text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    { letter: 'D', name: 'Diversificación', en: 'Diversification', cat: 'Inversiones',
+      def: 'Estrategia de gestión de riesgo que consiste en distribuir las inversiones entre distintos activos, sectores, geografías o clases de activos para reducir la exposición a cualquier riesgo individual. Se basa en el principio de que activos no correlacionados negativamente no caerán todos al mismo tiempo.',
+      example: 'En lugar de invertir todo en una sola acción, distribuir entre un ETF de 500 empresas reduce el riesgo específico de empresa sin necesariamente reducir el retorno esperado.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }, { text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    { letter: 'D', name: 'Dollar-Cost Averaging', en: 'Dollar-Cost Averaging (DCA)', cat: 'Inversiones',
+      def: 'Estrategia de inversión que consiste en invertir una cantidad fija de dinero a intervalos regulares, independientemente del precio del activo. Cuando el precio está bajo, se compran más unidades; cuando está alto, se compran menos. Elimina la necesidad de predecir el momento correcto de entrada al mercado.',
+      example: 'Invertir $200.000 cada mes en un ETF del S&P 500, sin importar si el mercado sube o baja. En 12 meses se habrán invertido $2.400.000 a un precio promedio del período.',
+      related: [{ text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }, { text: 'Calculadora interés compuesto', href: '../tools/compound.html' }] },
+
+    // E
+    { letter: 'E', name: 'EBITDA', en: 'EBITDA', cat: 'Finanzas Corporativas',
+      def: 'Siglas en inglés de Earnings Before Interest, Taxes, Depreciation and Amortization (Utilidades antes de intereses, impuestos, depreciación y amortización). Representa la capacidad operativa real de generación de caja de un negocio, excluyendo efectos contables y decisiones de financiamiento. Es el indicador más usado por bancos e inversores para evaluar empresas.',
+      example: 'Una empresa con utilidad operativa de $80M, depreciación de $15M y amortización de $5M tiene un EBITDA de $100M. Si sus ingresos son $500M, su margen EBITDA es 20%.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }, { text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    { letter: 'E', name: 'ETF', en: 'ETF (Exchange Traded Fund)', cat: 'Inversiones',
+      def: 'Fondo de inversión que replica un índice, sector, commodity u otro activo, y que se negocia en bolsa como una acción ordinaria. Combina la diversificación de un fondo mutuo con la flexibilidad de negociación en tiempo real de una acción. Generalmente tiene comisiones muy bajas.',
+      example: 'El SPY replica el índice S&P 500 (500 empresas grandes de EE.UU.). Comprando una sola participación de SPY tienes exposición proporcional a Apple, Microsoft, Amazon y 497 empresas más.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }, { text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    { letter: 'E', name: 'Expense Ratio', en: 'Expense Ratio', cat: 'Inversiones',
+      def: 'Costo anual de un fondo de inversión o ETF expresado como porcentaje del valor invertido. Incluye comisiones de gestión, costos administrativos y otros gastos operativos. Impacta directamente el retorno neto del inversor — un ratio del 1% sobre $10.000.000 representa $100.000 anuales en costos.',
+      example: 'El ETF VOO (Vanguard S&P 500) tiene un expense ratio del 0.03% anual. Un fondo activo típico cobra entre 0.8% y 2.0%.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }] },
+
+    // F
+    { letter: 'F', name: 'Flujo de caja libre', en: 'Free Cash Flow (FCF)', cat: 'Finanzas Corporativas',
+      def: 'Efectivo generado por las operaciones de una empresa después de descontar las inversiones necesarias para mantener o expandir su base de activos productivos (capex). Es el dinero que realmente le queda a la empresa para pagar deudas, distribuir dividendos o reinvertir. Fórmula: FCF = Flujo operativo − Capex.',
+      example: 'Una empresa genera $500M en flujo operativo y gasta $120M en mantenimiento y nuevas instalaciones. Su FCF es $380M — ese es el dinero real disponible.',
+      related: [{ text: 'Flujo de caja', href: '../articles/es/flujo-de-caja.html' }, { text: 'EBITDA', href: null }] },
+
+    { letter: 'F', name: 'Fondo de emergencia', en: 'Emergency Fund', cat: 'Finanzas Personales',
+      def: 'Reserva de dinero líquido destinada a cubrir gastos imprevistos o períodos de interrupción de ingresos (pérdida de empleo, enfermedad, reparaciones urgentes). La recomendación estándar es mantener entre 3 y 6 meses de gastos esenciales en una cuenta accesible y de bajo riesgo.',
+      example: 'Si tus gastos mensuales esenciales son $2.500.000, tu fondo de emergencia debería ser entre $7.500.000 y $15.000.000 depositados en una cuenta de ahorros o CDT de corto plazo.',
+      related: [{ text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }, { text: 'Regla 50/30/20', href: '../articles/es/regla-50-30-20.html' }] },
+
+    { letter: 'F', name: 'Fondo mutuo', en: 'Mutual Fund', cat: 'Inversiones',
+      def: 'Vehículo de inversión colectiva que agrupa el dinero de múltiples inversores para comprar una cartera diversificada de activos. A diferencia de los ETFs, los fondos mutuos se negocian al precio de cierre del día, no en tiempo real. Generalmente tienen mayores comisiones y están gestionados activamente.',
+      example: 'Un fondo mutuo de acciones colombianas reúne $10.000 de 1.000 inversores diferentes y compra acciones del COLCAP. Cada inversor recibe participaciones proporcionales.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }] },
+
+    // I
+    { letter: 'I', name: 'Índice bursátil', en: 'Stock Market Index', cat: 'Inversiones',
+      def: 'Indicador estadístico que mide el desempeño de un grupo de valores (acciones, bonos, etc.) representativo de un mercado o segmento. Los índices más conocidos son el S&P 500 (500 mayores empresas de EE.UU.), el Dow Jones, el MSCI World y el COLCAP (Colombia).',
+      example: 'El S&P 500 subió 26% en 2023. Esto significa que el valor conjunto de las 500 empresas que componen el índice aumentó en promedio ese porcentaje.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }, { text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    { letter: 'I', name: 'Inflación', en: 'Inflation', cat: 'Macroeconomía',
+      def: 'Aumento generalizado y sostenido del nivel de precios de bienes y servicios en una economía durante un período de tiempo. Reduce el poder adquisitivo del dinero — con $100 compras menos cosas que hace un año. Se mide mediante el Índice de Precios al Consumidor (IPC).',
+      example: 'Con una inflación del 8% anual, algo que costaba $100.000 en enero valdrá $108.000 en diciembre. Tus ahorros pierden poder de compra si no crecen al menos al ritmo de la inflación.',
+      related: [{ text: 'Inflación en 2025', href: '../articles/es/inflacion-2025.html' }, { text: 'Tasa de interés real', href: null }] },
+
+    { letter: 'I', name: 'Interés compuesto', en: 'Compound Interest', cat: 'Educación Financiera',
+      def: 'Mecanismo por el cual los intereses generados se reinvierten y a su vez generan nuevos intereses. A diferencia del interés simple (que calcula siempre sobre el capital original), el interés compuesto trabaja sobre una base que crece continuamente. Es el principio matemático más poderoso en finanzas a largo plazo.',
+      example: '$1.000.000 al 10% anual simple genera $100.000 por año. Al 10% compuesto, en el año 10 genera $235.794 ese año solo — porque la base ya no es $1M sino $2.358.125.',
+      related: [{ text: 'Interés compuesto — artículo', href: '../articles/es/interes-compuesto.html' }, { text: 'Calculadora interés compuesto', href: '../tools/compound.html' }] },
+
+    { letter: 'I', name: 'IPC', en: 'CPI (Consumer Price Index)', cat: 'Macroeconomía',
+      def: 'Índice de Precios al Consumidor. Indicador que mide la variación del costo de una canasta representativa de bienes y servicios que consume un hogar típico. Es la medida más utilizada para calcular la inflación y ajustar salarios, pensiones y contratos.',
+      example: 'Si el IPC de Colombia sube de 100 a 107 en un año, la inflación fue del 7%. Un trabajador que ganaba $3.000.000 necesita ganar $3.210.000 para mantener el mismo poder adquisitivo.',
+      related: [{ text: 'Inflación en 2025', href: '../articles/es/inflacion-2025.html' }] },
+
+    // L
+    { letter: 'L', name: 'Leasing', en: 'Leasing / Financial Lease', cat: 'Financiamiento',
+      def: 'Contrato de arrendamiento financiero por el cual una entidad financiera (arrendador) adquiere un activo y lo cede en uso a una empresa (arrendatario) a cambio de pagos periódicos. Al final del contrato, el arrendatario suele tener la opción de compra. Permite usar activos sin inmovilizar capital propio.',
+      example: 'Una empresa necesita maquinaria por $200.000.000. En lugar de comprarla, firma un leasing a 5 años con cuotas de $4.500.000 mensuales. Usa la máquina desde el primer día sin desembolsar el total.',
+      related: [{ text: '¿Cuándo endeudarse?', href: '../articles/es/cuando-pedir-credito.html' }] },
+
+    { letter: 'L', name: 'Liquidez', en: 'Liquidity', cat: 'Finanzas',
+      def: 'Capacidad de un activo de convertirse en efectivo rápidamente sin perder valor significativo. El efectivo es el activo más líquido. Los bienes raíces son poco líquidos. En el contexto empresarial, la liquidez mide la capacidad de cubrir obligaciones de corto plazo.',
+      example: 'Un ETF que cotiza en bolsa es altamente líquido — puedes venderlo en segundos. Un inmueble puede tardar meses en venderse al precio justo.',
+      related: [{ text: 'Razón corriente', href: null }, { text: 'Flujo de caja', href: '../articles/es/flujo-de-caja.html' }] },
+
+    // M
+    { letter: 'M', name: 'Margen bruto', en: 'Gross Margin', cat: 'Finanzas Corporativas',
+      def: 'Porcentaje de los ingresos que queda después de descontar el costo directo de producción o prestación del servicio. Fórmula: (Ingresos − Costo de ventas) / Ingresos × 100. Indica la eficiencia básica del modelo de negocio antes de gastos operativos.',
+      example: 'Una empresa de software con ingresos de $1.000M y costo de ventas de $200M tiene un margen bruto del 80%. Una empresa de manufactura con los mismos ingresos pero $700M en costos tiene un margen del 30%.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }] },
+
+    { letter: 'M', name: 'Margen neto', en: 'Net Margin', cat: 'Finanzas Corporativas',
+      def: 'Porcentaje de los ingresos que se convierte en utilidad neta después de descontar todos los costos, gastos, intereses e impuestos. Es la medida final de rentabilidad de un negocio. Fórmula: Utilidad neta / Ingresos × 100.',
+      example: 'Una empresa con $500M en ingresos y $25M en utilidad neta tiene un margen neto del 5%. Por cada $100 que vende, se queda con $5 de ganancia.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }, { text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    // P
+    { letter: 'P', name: 'Pasivo', en: 'Liability', cat: 'Contabilidad',
+      def: 'Obligación financiera de una empresa o persona con terceros, que representa una salida futura de recursos. Los pasivos se dividen en corrientes (deudas a pagar en menos de un año) y no corrientes (deudas a largo plazo).',
+      example: 'Los pasivos corrientes de una empresa incluyen cuentas por pagar a proveedores ($80M), préstamos bancarios de corto plazo ($50M) y salarios por pagar ($20M).',
+      related: [{ text: 'Balance general', href: null }, { text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    { letter: 'P', name: 'Patrimonio', en: 'Equity', cat: 'Contabilidad',
+      def: 'Valor residual de los activos de una empresa o persona después de deducir todos sus pasivos. Representa lo que realmente pertenece a los dueños o accionistas. Fórmula: Patrimonio = Activos − Pasivos.',
+      example: 'Una empresa con activos de $800M y pasivos de $500M tiene un patrimonio de $300M — ese es el valor neto de lo que poseen los dueños.',
+      related: [{ text: 'ROE', href: null }, { text: 'Balance general', href: null }] },
+
+    { letter: 'P', name: 'Portafolio de inversión', en: 'Investment Portfolio', cat: 'Inversiones',
+      def: 'Conjunto de todos los activos financieros (acciones, bonos, ETFs, efectivo, bienes raíces) que posee un inversor. La composición del portafolio — qué porcentaje va a cada clase de activo — es la decisión de inversión más importante, ya que determina el perfil de riesgo y retorno esperado.',
+      example: 'Un portafolio moderado puede tener 60% en ETFs de acciones globales, 30% en bonos y 10% en efectivo.',
+      related: [{ text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }, { text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }] },
+
+    { letter: 'P', name: 'Pricing power', en: 'Pricing Power', cat: 'Inversiones',
+      def: 'Capacidad de una empresa de subir sus precios sin perder una proporción significativa de sus clientes. Las empresas con alto pricing power tienen ventajas competitivas sólidas (marca, monopolio natural, costos de cambio altos) y son excelentes protecciones contra la inflación.',
+      example: 'Apple puede lanzar un iPhone a mayor precio cada año y sus usuarios siguen comprando. Eso es pricing power. Una empresa genérica de manufactura que compite solo por precio no lo tiene.',
+      related: [{ text: 'Inflación en 2025', href: '../articles/es/inflacion-2025.html' }] },
+
+    { letter: 'P', name: 'Proyección financiera', en: 'Financial Projection', cat: 'Planeación',
+      def: 'Estimación estructurada de los ingresos, costos, flujo de caja y posición financiera futura de un negocio. No es una predicción del futuro sino un modelo de hipótesis que articula los supuestos detrás del negocio y permite detectar desviaciones temprano.',
+      example: 'Un emprendedor proyecta ingresos de $50M en el mes 1, creciendo 15% mensual durante 6 meses, con costos variables del 40% y gastos fijos de $8M mensuales.',
+      related: [{ text: 'Proyecciones financieras', href: '../articles/es/proyecciones-financieras.html' }] },
+
+    // R
+    { letter: 'R', name: 'Razón corriente', en: 'Current Ratio', cat: 'Análisis Financiero',
+      def: 'Indicador de liquidez que mide la capacidad de una empresa de cubrir sus obligaciones de corto plazo con sus activos corrientes. Fórmula: Activos corrientes / Pasivos corrientes. Un valor mayor a 1 indica que la empresa puede pagar sus deudas de corto plazo.',
+      example: 'Una empresa con activos corrientes de $600M y pasivos corrientes de $300M tiene una razón corriente de 2.0 — por cada $1 de deuda a corto plazo, tiene $2 en activos líquidos.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }, { text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    { letter: 'R', name: 'Rebalanceo', en: 'Rebalancing', cat: 'Inversiones',
+      def: 'Proceso de ajustar la composición de un portafolio para restaurar la asignación de activos objetivo, después de que las variaciones de precio han modificado las proporciones originales. Se realiza vendiendo activos que se han apreciado más y comprando los que han quedado por debajo del porcentaje objetivo.',
+      example: 'Un portafolio con objetivo 70% acciones / 30% bonos. Después de un año con acciones subiendo mucho, queda en 80/20. El rebalanceo vende acciones y compra bonos para volver al 70/30.',
+      related: [{ text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    { letter: 'R', name: 'ROE', en: 'ROE (Return on Equity)', cat: 'Análisis Financiero',
+      def: 'Retorno sobre el Patrimonio. Mide la rentabilidad generada por una empresa en relación con el capital invertido por sus dueños. Fórmula: Utilidad neta / Patrimonio promedio × 100. Indica cuánto ganan los dueños por cada peso invertido en el negocio.',
+      example: 'Una empresa con utilidad neta de $50M y patrimonio de $250M tiene un ROE del 20%. Por cada $100 invertidos por los dueños, el negocio genera $20 de ganancia anual.',
+      related: [{ text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }] },
+
+    { letter: 'R', name: 'ROI', en: 'ROI (Return on Investment)', cat: 'Análisis Financiero',
+      def: 'Retorno sobre la Inversión. Mide el porcentaje de ganancia o pérdida generado por una inversión en relación con su costo. Fórmula: (Ganancia neta / Inversión inicial) × 100. Es útil para comparar inversiones del mismo plazo, pero puede ser engañoso para períodos distintos.',
+      example: 'Invertiste $5.000.000 y recibiste $7.500.000 al cabo de 2 años. Tu ROI es 50%. Pero el CAGR (rendimiento anualizado) es 22.5% — ese es el número correcto para comparar con otras inversiones.',
+      related: [{ text: 'Calculadora ROI', href: '../tools/roi.html' }, { text: 'CAGR', href: null }] },
+
+    { letter: 'R', name: 'Runway', en: 'Runway', cat: 'Startups',
+      def: 'Tiempo que le queda a una empresa, generalmente una startup, antes de quedarse sin efectivo si mantiene su nivel actual de gasto. Se calcula dividiendo el efectivo disponible entre el burn rate mensual. Es el indicador de supervivencia más crítico para empresas pre-rentables.',
+      example: 'Una startup con $900.000 en caja y un burn rate de $75.000 mensuales tiene 12 meses de runway.',
+      related: [{ text: 'Burn rate', href: null }, { text: 'Los 7 KPIs esenciales', href: '../articles/es/kpis-pymes.html' }] },
+
+    // S
+    { letter: 'S', name: 'S&P 500', en: 'S&P 500', cat: 'Índices',
+      def: 'Índice bursátil que mide el desempeño de las 500 empresas más grandes de Estados Unidos por capitalización de mercado. Es el índice de referencia más usado globalmente para medir el desempeño del mercado accionario estadounidense y como benchmark para fondos de inversión.',
+      example: 'El S&P 500 incluye empresas como Apple, Microsoft, Amazon, NVIDIA y Berkshire Hathaway. Su retorno promedio histórico es de aproximadamente 10% anual nominal desde 1928.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }, { text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    { letter: 'S', name: 'Spread', en: 'Spread', cat: 'Mercados',
+      def: 'Diferencia entre dos precios o tasas. En el mercado de bonos, es la diferencia entre la tasa de un bono y la tasa libre de riesgo de referencia, y representa la prima por riesgo de crédito. En divisas o trading, es la diferencia entre el precio de compra y el de venta de un activo.',
+      example: 'Si un bono corporativo rinde 9% y el bono del gobierno (libre de riesgo) rinde 6%, el spread es 300 puntos básicos (3%). Ese spread refleja el riesgo adicional de la empresa.',
+      related: [{ text: 'Bono', href: null }] },
+
+    // T
+    { letter: 'T', name: 'Tasa de interés real', en: 'Real Interest Rate', cat: 'Macroeconomía',
+      def: 'Tasa de interés ajustada por la inflación. Representa el verdadero poder adquisitivo ganado (o perdido) sobre una inversión o deuda, después de descontar el efecto de la inflación. Fórmula simplificada: Tasa real ≈ Tasa nominal − Inflación.',
+      example: 'Un CDT al 12% anual con una inflación del 8% tiene una tasa real del 4%. Tus ahorros crecen en poder adquisitivo, pero no tanto como el número nominal sugiere.',
+      related: [{ text: 'Inflación en 2025', href: '../articles/es/inflacion-2025.html' }] },
+
+    { letter: 'T', name: 'TEA', en: 'APR (Annual Percentage Rate)', cat: 'Crédito',
+      def: 'Tasa Efectiva Anual. Representa el costo o rendimiento real de un crédito o inversión durante un año, incluyendo todos los efectos del interés compuesto y los costos asociados. Es la tasa que permite comparar correctamente productos financieros con distintas estructuras de cobro.',
+      example: 'Un crédito con tasa nominal mensual del 2% tiene una TEA del 26.8% anual (no 24%) por efecto del interés compuesto. Siempre exige la TEA para comparar correctamente.',
+      related: [{ text: '¿Cuándo endeudarse?', href: '../articles/es/cuando-pedir-credito.html' }] },
+
+    { letter: 'T', name: 'Tracking error', en: 'Tracking Error', cat: 'Inversiones',
+      def: 'Medida de qué tan fielmente un ETF o fondo indexado replica el desempeño de su índice de referencia. Un tracking error bajo (menor a 0.10%) indica que el fondo hace bien su trabajo. Un tracking error alto puede indicar costos ocultos o ineficiencias en la gestión.',
+      example: 'Si el S&P 500 sube 10.5% en un año y el ETF que lo replica sube 10.42%, el tracking error es de 0.08 puntos porcentuales — excelente.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }] },
+
+    // U
+    { letter: 'U', name: 'Utilidad bruta', en: 'Gross Profit', cat: 'Contabilidad',
+      def: 'Diferencia entre los ingresos por ventas y el costo directo de producción o prestación del servicio (costo de ventas). Representa la primera línea de rentabilidad antes de descontar gastos operativos, intereses e impuestos.',
+      example: 'Una empresa con ingresos de $800M y costo de ventas de $480M tiene una utilidad bruta de $320M y un margen bruto del 40%.',
+      related: [{ text: 'Margen bruto', href: null }, { text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }] },
+
+    { letter: 'U', name: 'Utilidad neta', en: 'Net Income', cat: 'Contabilidad',
+      def: 'Ganancia final de una empresa después de deducir todos los costos, gastos operativos, intereses, impuestos y demás deducciones de los ingresos. Es la última línea del estado de resultados ("the bottom line") y representa el beneficio real para los dueños.',
+      example: 'Una empresa con $1.000M en ingresos, $600M en costos de ventas, $250M en gastos operativos, $30M en intereses y $40M en impuestos tiene una utilidad neta de $80M.',
+      related: [{ text: 'Los 3 estados financieros', href: '../articles/es/contabilidad-basica-pymes.html' }, { text: 'ROE', href: null }] },
+
+    // V
+    { letter: 'V', name: 'Volatilidad', en: 'Volatility', cat: 'Inversiones',
+      def: 'Medida de la variabilidad o fluctuación en el precio de un activo financiero a lo largo del tiempo. Un activo muy volátil sube y baja mucho en cortos períodos. Se mide estadísticamente mediante la desviación estándar de los retornos. Mayor volatilidad implica mayor riesgo pero también mayor potencial de retorno.',
+      example: 'Las acciones de una startup tecnológica pueden subir 50% o bajar 40% en un año — alta volatilidad. Un bono gubernamental de corto plazo varía apenas 1-2% — baja volatilidad.',
+      related: [{ text: 'ETFs para principiantes', href: '../articles/es/etfs-para-principiantes.html' }, { text: 'Portafolio desde cero', href: '../articles/es/portafolio-desde-cero.html' }] },
+
+    // VPN
+    { letter: 'V', name: 'VPN', en: 'NPV (Net Present Value)', cat: 'Finanzas Corporativas',
+      def: 'Valor Presente Neto. Método de evaluación de inversiones que descuenta los flujos de caja futuros al presente usando una tasa de descuento. Si el VPN es positivo, la inversión crea valor. Si es negativo, destruye valor. Es el criterio más riguroso para evaluar proyectos de inversión.',
+      example: 'Un proyecto que requiere $100.000.000 hoy y generará $30.000.000 anuales durante 5 años tiene un VPN positivo si la tasa de descuento es menor al 15.2% — es decir, si el costo del capital es menor a ese umbral.',
+      related: [{ text: 'Proyecciones financieras', href: '../articles/es/proyecciones-financieras.html' }, { text: '¿Cuándo endeudarse?', href: '../articles/es/cuando-pedir-credito.html' }] },
+
+  ];
+
+  // ── RENDER ──────────────────────────────────────────────────────────────────
+  const body = document.getElementById('glossary-body');
+  const noResults = document.getElementById('no-results');
+  const totalCount = document.getElementById('total-count');
+  const visibleCount = document.getElementById('visible-count');
+
+  // Group by letter
+  const grouped = {};
+  TERMS.forEach(t => {
+    if (!grouped[t.letter]) grouped[t.letter] = [];
+    grouped[t.letter].push(t);
+  });
+
+  // Build alphabet nav
+  const alphaNav = document.getElementById('alpha-nav');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  letters.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'alpha-btn' + (grouped[l] ? ' has-terms' : ' disabled');
+    btn.textContent = l;
+    if (grouped[l]) {
+      btn.onclick = () => {
+        const target = document.getElementById('section-' + l);
+        if (target) window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
+      };
+    }
+    alphaNav.appendChild(btn);
+  });
+
+  // Build glossary sections
+  Object.keys(grouped).sort().forEach(letter => {
+    const section = document.createElement('div');
+    section.className = 'letter-section';
+    section.id = 'section-' + letter;
+    section.innerHTML = `<div class="letter-anchor">${letter}</div>`;
+
+    grouped[letter].forEach(term => {
+      const relatedHTML = term.related && term.related.length
+        ? `<div class="term-related">
+            <span class="term-related-label">Ver también:</span>
+            ${term.related.map(r => r.href
+              ? `<a href="${r.href}" class="term-related-link">${r.text}</a>`
+              : `<span class="term-related-link" style="opacity:0.4;cursor:default;">${r.text}</span>`
+            ).join('')}
+           </div>`
+        : '';
+
+      const card = document.createElement('div');
+      card.className = 'term-card';
+      card.dataset.name = term.name.toLowerCase();
+      card.dataset.en = term.en.toLowerCase();
+      card.dataset.def = term.def.toLowerCase();
+      card.innerHTML = `
+        <div class="term-header">
+          <div class="term-name">${term.name}</div>
+          <span class="term-name-en">${term.en}</span>
+          <span class="term-category">${term.cat}</span>
+        </div>
+        <div class="term-body">
+          <p class="term-def">${term.def}</p>
+          ${term.example ? `<p class="term-example"><strong>Ejemplo:</strong> ${term.example}</p>` : ''}
+          ${relatedHTML}
+        </div>`;
+      section.appendChild(card);
+    });
+    body.appendChild(section);
+  });
+
+  // Update counts
+  totalCount.innerHTML = `<span>${TERMS.length}</span>`;
+  visibleCount.innerHTML = `<span>${TERMS.length}</span>`;
+
+  // ── SEARCH ──────────────────────────────────────────────────────────────────
+  document.getElementById('search-input').addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    let visible = 0;
+
+    document.querySelectorAll('.term-card').forEach(card => {
+      const match = !q
+        || card.dataset.name.includes(q)
+        || card.dataset.en.includes(q)
+        || card.dataset.def.includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+
+    // Hide/show letter sections with no visible terms
+    document.querySelectorAll('.letter-section').forEach(section => {
+      const hasVisible = section.querySelectorAll('.term-card:not(.hidden)').length > 0;
+      section.style.display = hasVisible ? '' : 'none';
+    });
+
+    noResults.style.display = (visible === 0 && q) ? 'block' : 'none';
+    document.getElementById('search-query').textContent = q;
+    visibleCount.innerHTML = `<span>${visible}</span>`;
+  });
+
+  // ── NAV ──────────────────────────────────────────────────────────────────────
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  </script>
+
+</body>
+</html>
