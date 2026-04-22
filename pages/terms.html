@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Términos y Condiciones de uso de Clear Finance. Las reglas que rigen el uso del sitio y su contenido."/>
+  <meta name="google-site-verification" content="E9WRcKJHtC8UUgmZKm2e1vwb1-cq8TdKOCISaaK0OYE" />
+  <title>Términos y Condiciones — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <style>
+    .legal-hero {
+      padding: 9rem 4rem 4rem;
+      border-bottom: 1px solid rgba(184,154,90,0.1);
+    }
+    .legal-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .legal-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .legal-title em { font-style: italic; color: var(--gold-light); }
+    .legal-meta {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: rgba(248,246,241,0.35);
+      margin-top: 1.5rem;
+    }
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+      margin-top: 2rem;
+    }
+    .lang-toggle button {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border: 1px solid rgba(184,154,90,0.3);
+      background: transparent;
+      color: rgba(248,246,241,0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-toggle button.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+    .legal-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 5rem 4rem 7rem;
+    }
+    .legal-section { margin-bottom: 3rem; }
+    .legal-section h2 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(184,154,90,0.12);
+    }
+    .legal-section h3 {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--gold-light);
+      margin: 1.5rem 0 0.6rem;
+      text-transform: uppercase;
+    }
+    .legal-section p {
+      font-size: 0.92rem;
+      color: rgba(248,246,241,0.65);
+      line-height: 2;
+      margin-bottom: 1rem;
+    }
+    .legal-section ul {
+      list-style: none;
+      margin: 0.5rem 0 1rem;
+    }
+    .legal-section ul li {
+      font-size: 0.9rem;
+      color: rgba(248,246,241,0.65);
+      line-height: 1.8;
+      padding: 0.3rem 0 0.3rem 1.2rem;
+      position: relative;
+    }
+    .legal-section ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+    }
+    .legal-section a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,154,90,0.3);
+      transition: border-color 0.2s;
+    }
+    .legal-section a:hover { border-color: var(--gold); }
+    .highlight-box {
+      background: rgba(184,154,90,0.05);
+      border: 1px solid rgba(184,154,90,0.15);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+    }
+    .highlight-box p { font-size: 0.88rem; margin-bottom: 0; color: rgba(248,246,241,0.7); }
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
+
+    @media (max-width: 768px) {
+      .legal-hero, .legal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .legal-hero { padding-top: 7rem; }
+      .legal-body { padding-top: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html">Artículos</a></li>
+      <li><a href="business.html">Negocios</a></li>
+      <li><a href="../tools/index.html">Herramientas</a></li>
+      <li><a href="about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn" onclick="window.location.href='../en/pages/terms.html'">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="legal-hero">
+    <span class="legal-tag">Legal · Términos</span>
+    <h1 class="legal-title">Términos y<br><em>Condiciones.</em></h1>
+    <p class="legal-meta">Última actualización: 20 de abril de 2026 · Last updated: April 20, 2026</p>
+    <div class="lang-toggle">
+      <button class="active" onclick="setLang('es')">Español</button>
+      <button onclick="setLang('en')">English</button>
+    </div>
+  </div>
+
+  <div class="legal-body">
+
+    <!-- ── ESPAÑOL ── -->
+    <div id="content-es" class="lang-content active">
+
+      <div class="highlight-box">
+        <p>Al acceder y usar <strong>clearfinance.github.io</strong>, aceptas estos Términos y Condiciones. Si no estás de acuerdo con alguno de estos términos, te pedimos que no uses el sitio.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>1. Sobre Clear Finance</h2>
+        <p>Clear Finance es un blog de educación financiera operado como marca comercial desde Colombia. Nuestro contenido está disponible en <strong>clearfinance.github.io</strong> y es de acceso libre y gratuito.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>2. Naturaleza del contenido — Aviso importante</h2>
+        <div class="highlight-box">
+          <p>⚠️ <strong>El contenido de Clear Finance es únicamente educativo e informativo.</strong> No constituye asesoramiento financiero, de inversión, contable, legal o fiscal personalizado. Los artículos, calculadoras y herramientas son material educativo general y no deben usarse como base para tomar decisiones financieras importantes sin consultar a un profesional certificado.</p>
+        </div>
+        <p>Clear Finance no es un asesor financiero registrado, un corredor de valores, una institución bancaria ni una entidad regulada por la Superintendencia Financiera de Colombia ni por ninguna otra autoridad financiera.</p>
+        <p>Los rendimientos pasados no garantizan resultados futuros. Toda inversión conlleva riesgo, incluyendo la posible pérdida del capital.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>3. Uso permitido del sitio</h2>
+        <p>Puedes usar el sitio para:</p>
+        <ul>
+          <li>Leer y compartir el contenido educativo con fines personales no comerciales</li>
+          <li>Usar las calculadoras y herramientas para estimaciones personales</li>
+          <li>Citar artículos con atribución apropiada a Clear Finance y enlace al original</li>
+        </ul>
+        <p>Está prohibido:</p>
+        <ul>
+          <li>Reproducir el contenido completo del sitio sin autorización escrita</li>
+          <li>Usar el contenido con fines comerciales sin permiso explícito</li>
+          <li>Modificar o presentar el contenido como propio</li>
+          <li>Intentar acceder a sistemas o datos del sitio de forma no autorizada</li>
+          <li>Usar el sitio para distribuir spam, malware o contenido ilegal</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>4. Propiedad intelectual</h2>
+        <p>Todo el contenido original de Clear Finance — incluyendo artículos, herramientas, diseño gráfico y código — es propiedad de Clear Finance y está protegido por las leyes de propiedad intelectual aplicables en Colombia y a nivel internacional.</p>
+        <p>Las fuentes académicas citadas en los artículos son propiedad de sus respectivos autores y editores. Clear Finance las cita conforme a normas académicas estándar (APA) con fines educativos.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>5. Publicidad</h2>
+        <p>Clear Finance puede mostrar publicidad de terceros a través de <strong>Google AdSense</strong>. Los anuncios son seleccionados y servidos por Google de forma independiente. Clear Finance no respalda los productos o servicios anunciados ni es responsable de su contenido.</p>
+        <p>No existe ningún acuerdo comercial entre Clear Finance y los anunciantes que influya en el contenido editorial del blog. El contenido educativo se produce de forma completamente independiente de la publicidad mostrada.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>6. Enlaces de afiliados</h2>
+        <p>Algunos artículos pueden contener enlaces de afiliado a plataformas de inversión, brokers u otros servicios financieros. Si haces clic en un enlace de afiliado y realizas una acción (como abrir una cuenta), Clear Finance puede recibir una compensación sin costo adicional para ti.</p>
+        <p>Los enlaces de afiliado se identifican claramente cuando están presentes. Las recomendaciones son independientes de cualquier relación comercial y basadas en criterios editoriales.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>7. Exactitud del contenido</h2>
+        <p>Nos esforzamos por mantener el contenido actualizado y preciso. Sin embargo:</p>
+        <ul>
+          <li>Los datos macroeconómicos y tasas de mercado cambian constantemente</li>
+          <li>Las regulaciones financieras varían por país y pueden cambiar</li>
+          <li>Las calculadoras son herramientas ilustrativas, no proyecciones garantizadas</li>
+        </ul>
+        <p>Clear Finance no garantiza la exactitud, completitud o actualidad del contenido. Siempre verifica información crítica con fuentes oficiales y profesionales certificados.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>8. Limitación de responsabilidad</h2>
+        <p>En la máxima medida permitida por la ley, Clear Finance no será responsable por:</p>
+        <ul>
+          <li>Pérdidas financieras derivadas del uso del contenido del sitio</li>
+          <li>Decisiones de inversión tomadas con base en los artículos o herramientas</li>
+          <li>Interrupciones del servicio o errores técnicos del sitio</li>
+          <li>Daños causados por el contenido de sitios externos enlazados</li>
+          <li>Pérdida de datos o acceso no autorizado a tu dispositivo</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>9. Privacidad</h2>
+        <p>El uso de este sitio también está sujeto a nuestra <a href="privacy.html">Política de Privacidad</a>, que forma parte integral de estos Términos y Condiciones.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>10. Modificaciones al sitio</h2>
+        <p>Clear Finance se reserva el derecho de modificar, suspender o descontinuar cualquier parte del sitio en cualquier momento, sin previo aviso. También podemos modificar estos Términos y Condiciones. Los cambios entran en vigor al momento de su publicación.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>11. Ley aplicable y jurisdicción</h2>
+        <p>Estos Términos y Condiciones se rigen por las leyes de la República de Colombia. Cualquier disputa se someterá a la jurisdicción de los tribunales competentes de Colombia, sin perjuicio de los derechos que puedan corresponder a los usuarios en sus respectivos países de acuerdo con la normativa de protección al consumidor aplicable.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>12. Contacto</h2>
+        <p>Para preguntas sobre estos Términos y Condiciones:</p>
+        <p><strong>Clear Finance</strong><br>
+        Email: legal@clearfinance.co<br>
+        País de operación: Colombia</p>
+      </div>
+
+    </div>
+
+    <!-- ── ENGLISH ── -->
+    <div id="content-en" class="lang-content">
+
+      <div class="highlight-box">
+        <p>By accessing and using <strong>clearfinance.github.io</strong>, you agree to these Terms and Conditions. If you disagree with any of these terms, please do not use the site.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>1. About Clear Finance</h2>
+        <p>Clear Finance is a financial education blog operated as a commercial brand from Colombia. Our content is available at <strong>clearfinance.github.io</strong> and is freely accessible at no cost.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>2. Nature of content — Important disclaimer</h2>
+        <div class="highlight-box">
+          <p>⚠️ <strong>Clear Finance content is for educational and informational purposes only.</strong> It does not constitute personalized financial, investment, accounting, legal or tax advice. Articles, calculators and tools are general educational material and should not be used as the basis for important financial decisions without consulting a certified professional.</p>
+        </div>
+        <p>Clear Finance is not a registered financial advisor, securities broker, banking institution, or entity regulated by any financial authority.</p>
+        <p>Past performance does not guarantee future results. All investments carry risk, including the possible loss of capital.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>3. Permitted use of the site</h2>
+        <p>You may use the site to:</p>
+        <ul>
+          <li>Read and share educational content for personal, non-commercial purposes</li>
+          <li>Use calculators and tools for personal estimates</li>
+          <li>Quote articles with appropriate attribution to Clear Finance and a link to the original</li>
+        </ul>
+        <p>The following are prohibited:</p>
+        <ul>
+          <li>Reproducing the full site content without written authorization</li>
+          <li>Using content for commercial purposes without explicit permission</li>
+          <li>Modifying or presenting content as your own</li>
+          <li>Attempting to access site systems or data without authorization</li>
+          <li>Using the site to distribute spam, malware or illegal content</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>4. Intellectual property</h2>
+        <p>All original Clear Finance content — including articles, tools, graphic design and code — is the property of Clear Finance and protected by applicable intellectual property laws in Colombia and internationally.</p>
+        <p>Academic sources cited in articles are the property of their respective authors and publishers. Clear Finance cites them in accordance with standard academic conventions (APA) for educational purposes.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>5. Advertising</h2>
+        <p>Clear Finance may display third-party advertising through <strong>Google AdSense</strong>. Ads are selected and served by Google independently. Clear Finance does not endorse the products or services advertised and is not responsible for their content.</p>
+        <p>There are no commercial agreements between Clear Finance and advertisers that influence the blog's editorial content. Educational content is produced completely independently of advertising displayed.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>6. Affiliate links</h2>
+        <p>Some articles may contain affiliate links to investment platforms, brokers or other financial services. If you click an affiliate link and complete an action (such as opening an account), Clear Finance may receive compensation at no additional cost to you.</p>
+        <p>Affiliate links are clearly identified when present. Recommendations are independent of any commercial relationship and based on editorial criteria.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>7. Content accuracy</h2>
+        <p>We strive to keep content current and accurate. However:</p>
+        <ul>
+          <li>Macroeconomic data and market rates change constantly</li>
+          <li>Financial regulations vary by country and may change</li>
+          <li>Calculators are illustrative tools, not guaranteed projections</li>
+        </ul>
+        <p>Clear Finance does not guarantee the accuracy, completeness or currency of content. Always verify critical information with official sources and certified professionals.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>8. Limitation of liability</h2>
+        <p>To the fullest extent permitted by law, Clear Finance shall not be liable for:</p>
+        <ul>
+          <li>Financial losses resulting from use of site content</li>
+          <li>Investment decisions made based on articles or tools</li>
+          <li>Service interruptions or technical errors on the site</li>
+          <li>Damages caused by content of externally linked sites</li>
+          <li>Data loss or unauthorized access to your device</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>9. Privacy</h2>
+        <p>Use of this site is also subject to our <a href="privacy.html">Privacy Policy</a>, which forms an integral part of these Terms and Conditions.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>10. Modifications to the site</h2>
+        <p>Clear Finance reserves the right to modify, suspend or discontinue any part of the site at any time without prior notice. We may also modify these Terms and Conditions. Changes take effect upon publication.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>11. Governing law and jurisdiction</h2>
+        <p>These Terms and Conditions are governed by the laws of the Republic of Colombia. Any disputes will be subject to the jurisdiction of the competent courts of Colombia, without prejudice to the rights that may correspond to users in their respective countries under applicable consumer protection regulations.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>12. Contact</h2>
+        <p>For questions about these Terms and Conditions:</p>
+        <p><strong>Clear Finance</strong><br>
+        Email: legal@clearfinance.co<br>
+        Country of operation: Colombia</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Explorar</span>
+        <ul class="footer-links">
+          <li><a href="blog.html">Artículos</a></li>
+          <li><a href="glosario.html">Glosario</a></li>
+          <li><a href="about.html">Sobre nosotros</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Legal</span>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Política de Privacidad</a></li>
+          <li><a href="terms.html" class="active">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    function setLang(lang) {
+      document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.lang-toggle button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('content-' + lang).classList.add('active');
+      event.target.classList.add('active');
+      document.documentElement.lang = lang;
+    }
+  </script>
+
+</body>
+</html>
