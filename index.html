@@ -14,6 +14,13 @@
 
   <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9870585852151650" crossorigin="anonymous"></script>
+  <!-- Brevo Form -->
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+  <style>
+    .brevo-form-wrap { max-width:560px; margin:2rem auto 0; }
+    #sib-form .sib-hide-loader-icon { display:none; }
+    .g-recaptcha { transform:scale(0.85); transform-origin:center; }
+  </style>
 
 </head>
 <body>
@@ -342,17 +349,51 @@
   <div class="divider"></div>
 
   <!-- ── NEWSLETTER ── -->
-  <section class="newsletter">
+  <section class="newsletter" id="newsletter">
     <p class="section-tag">Newsletter</p>
     <h2 class="newsletter-title">
       Claridad financiera,<br>
       <em>directo a tu bandeja.</em>
     </h2>
     <p class="newsletter-sub">Sin spam. Solo artículos, análisis y herramientas nuevas que valen tu tiempo — una vez a la semana, en español e inglés.</p>
-    <div class="newsletter-form">
-      <input type="email" class="newsletter-input" placeholder="tu@email.com">
-      <button class="newsletter-btn">Suscribirme</button>
+
+    <!-- Brevo Newsletter Form -->
+    <div class="brevo-form-wrap">
+      <form id="sib-form" method="POST" action="https://0fb15abb.sibforms.com/serve/MUIFAL-pZI5b9kmGn3adwvU-kOgpcwI9KwLchNsIrH4FWe6Bt1A9v_A6D6nFLZ4tXatbGq0mCqgBhNDCBbX9bLIpOHI2QcN1c6WvKmEWjSI53f_eblNle-uJHJG6ufEllNWiSfaZ9uhzL1gVTFMourxuA5e9omee1dRW6HrSganYyRy7tV7QYGZIcptJgozY_1AUEIgouQajYKTJ2g==" data-type="subscription">
+        <div class="newsletter-form">
+          <input class="newsletter-input" type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="tu@email.com" data-required="true" required />
+          <button class="newsletter-btn sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+            <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="width:14px;height:14px;margin-right:6px;">
+              <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/>
+            </svg>
+            Suscribirme
+          </button>
+        </div>
+
+        <!-- Success / Error messages -->
+        <div id="error-message" class="sib-form-message-panel" style="display:none; margin-top:1rem; padding:0.8rem 1.2rem; background:rgba(255,73,73,0.1); border:1px solid #ff4949; border-radius:4px; color:#ff4949; font-size:0.85rem; max-width:480px; margin-left:auto; margin-right:auto;">
+          No hemos podido validar tu suscripción. Verifica tu email e inténtalo de nuevo.
+        </div>
+        <div id="success-message" class="sib-form-message-panel" style="display:none; margin-top:1rem; padding:0.8rem 1.2rem; background:rgba(184,154,90,0.1); border:1px solid var(--gold); border-radius:4px; color:var(--gold); font-size:0.85rem; max-width:480px; margin-left:auto; margin-right:auto;">
+          ¡Suscripción realizada! Bienvenido a Clear Finance Newsletter.
+        </div>
+
+        <!-- reCAPTCHA -->
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+          <script>
+            function handleCaptchaResponse() {
+              var event = new Event('captchaChange');
+              document.getElementById('sib-captcha').dispatchEvent(event);
+            }
+          </script>
+          <div class="g-recaptcha" id="sib-captcha" data-sitekey="6LfuWQYtAAAAAIagF854387Cx5PetDmBER-ocD49" data-callback="handleCaptchaResponse"></div>
+        </div>
+
+        <input type="text" name="email_address_check" value="" style="display:none;">
+        <input type="hidden" name="locale" value="es">
+      </form>
     </div>
+
     <p class="newsletter-note">Sin spam · Cancela cuando quieras · No Spam · Cancel Anytime</p>
   </section>
 
@@ -613,6 +654,17 @@
   </style>
 
 <script src="assets/js/cookies.js"></script>
+  <!-- Brevo Form Scripts -->
+  <script>
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
+    window.LOCALE = 'es';
+    window.EMAIL_INVALID_MESSAGE = "La información proporcionada no es válida. Comprueba el formato e inténtalo de nuevo.";
+    window.REQUIRED_ERROR_MESSAGE = "Este campo no puede quedarse vacío.";
+    window.GENERIC_INVALID_MESSAGE = "La información proporcionada no es válida.";
+    var AUTOHIDE = Boolean(0);
+  </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
 
 </body>
 </html>
