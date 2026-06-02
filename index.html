@@ -19,7 +19,6 @@
   <style>
     .brevo-form-wrap { max-width:560px; margin:2rem auto 0; }
     #sib-form .sib-hide-loader-icon { display:none; }
-    .g-recaptcha { transform:scale(0.85); transform-origin:center; }
   </style>
 
 </head>
@@ -378,17 +377,6 @@
           ¡Suscripción realizada! Bienvenido a Clear Finance Newsletter.
         </div>
 
-        <!-- reCAPTCHA -->
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-          <script>
-            function handleCaptchaResponse() {
-              var event = new Event('captchaChange');
-              document.getElementById('sib-captcha').dispatchEvent(event);
-            }
-          </script>
-          <div class="g-recaptcha" id="sib-captcha" data-sitekey="6LfuWQYtAAAAAIagF854387Cx5PetDmBER-ocD49" data-callback="handleCaptchaResponse"></div>
-        </div>
-
         <input type="text" name="email_address_check" value="" style="display:none;">
         <input type="hidden" name="locale" value="es">
       </form>
@@ -664,7 +652,6 @@
     var AUTOHIDE = Boolean(0);
   </script>
   <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
 
 </body>
 </html>
