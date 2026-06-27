@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Tienda Clear Finance — Plantillas, guías y ebooks para tomar mejores decisiones financieras. Recursos prácticos para tu dinero."/>
+  <meta name="keywords" content="plantillas finanzas, ebook finanzas, guía inversión, checklist inversor, clear finance tienda"/>
+  <meta name="google-site-verification" content="E9WRcKJHtC8UUgmZKm2e1vwb1-cq8TdKOCISaaK0OYE" />
+  <link rel="icon" type="image/png" href="../assets/img/Iconp.png">
+  <title>Tienda — Clear Finance</title>
+  <link rel="stylesheet" href="../assets/css/global.css"/>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9870585852151650" crossorigin="anonymous"></script>
+  <style>
+    /* ── HERO ── */
+    .store-hero {
+      padding: 9rem 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .store-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(184,154,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .store-hero-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .store-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .store-hero-title em { font-style: italic; color: var(--gold-light); }
+    .store-hero-sub {
+      font-size: 0.95rem;
+      color: rgba(248,246,241,0.5);
+      max-width: 520px;
+      line-height: 1.9;
+    }
+
+    /* ── FILTERS ── */
+    .store-filters {
+      padding: 2rem 4rem;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(184,154,90,0.08);
+    }
+    .store-filter {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border: 1px solid rgba(184,154,90,0.2);
+      background: transparent;
+      color: rgba(248,246,241,0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .store-filter:hover { border-color: rgba(184,154,90,0.5); color: var(--gold); }
+    .store-filter.active { background: var(--gold); border-color: var(--gold); color: var(--black); }
+
+    /* ── GRID ── */
+    .store-grid {
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      border: 1px solid rgba(184,154,90,0.12);
+      background: rgba(248,246,241,0.02);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      border-color: rgba(184,154,90,0.35);
+      transform: translateY(-2px);
+    }
+    .product-card.hidden { display: none; }
+
+    /* Badge */
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      background: var(--gold);
+      color: var(--black);
+    }
+    .product-badge.free { background: rgba(184,154,90,0.15); color: var(--gold); border: 1px solid rgba(184,154,90,0.3); }
+
+    /* Card visual */
+    .product-visual {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f0f0f;
+      border-bottom: 1px solid rgba(184,154,90,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-visual::before {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,154,90,0.08);
+      top: -60px; right: -60px;
+    }
+    .product-icon {
+      font-size: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .product-type-label {
+      position: absolute;
+      bottom: 0.8rem;
+      left: 1rem;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(184,154,90,0.5);
+    }
+
+    /* Card body */
+    .product-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-category {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .product-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+    .product-desc {
+      font-size: 0.82rem;
+      color: rgba(248,246,241,0.5);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+    .product-includes {
+      list-style: none;
+      margin-bottom: 1.2rem;
+    }
+    .product-includes li {
+      font-size: 0.78rem;
+      color: rgba(248,246,241,0.45);
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .product-includes li::before {
+      content: '✓';
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      flex-shrink: 0;
+    }
+
+    /* Card footer */
+    .product-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(184,154,90,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .product-price {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--white);
+    }
+    .product-price .price-free {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .product-price .price-note {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: rgba(248,246,241,0.3);
+      display: block;
+    }
+    .product-btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .product-btn:hover { background: var(--gold-light); }
+    .product-btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(184,154,90,0.3);
+      color: var(--gold);
+    }
+    .product-btn.secondary:hover { border-color: var(--gold); background: rgba(184,154,90,0.05); }
+
+    /* ── COMING SOON CARD ── */
+    .product-card.coming-soon { opacity: 0.5; pointer-events: none; }
+    .product-card.coming-soon .product-badge { background: rgba(248,246,241,0.1); color: rgba(248,246,241,0.4); }
+
+    /* ── DISCLOSURE ── */
+    .store-disclosure {
+      margin: 0 4rem 1rem;
+      padding: 1rem 1.5rem;
+      background: rgba(184,154,90,0.04);
+      border: 1px solid rgba(184,154,90,0.1);
+      font-size: 0.78rem;
+      color: rgba(248,246,241,0.35);
+      line-height: 1.7;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .store-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 768px) {
+      .store-hero, .store-grid { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .store-filters { padding: 1.5rem; }
+      .store-grid { grid-template-columns: 1fr; }
+      .store-disclosure { margin: 0 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Clear <span>Finance</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="blog.html">Artículos</a></li>
+      <li><a href="business.html">Negocios</a></li>
+      <li><a href="../tools/index.html">Herramientas</a></li>
+      <li><a href="about.html">Nosotros</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <button class="lang-btn active">ES</button>
+        <button class="lang-btn" onclick="window.location.href='../en/pages/tienda.html'">EN</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="store-hero">
+    <span class="store-hero-tag">Tienda · Shop</span>
+    <h1 class="store-hero-title">Recursos para<br>tomar mejores<br><em>decisiones.</em></h1>
+    <p class="store-hero-sub">Plantillas, guías y ebooks creados por Clear Finance. Contenido práctico que complementa los artículos gratuitos del blog — para cuando quieres ir más a fondo.</p>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="store-filters">
+    <button class="store-filter active" onclick="filterProducts('all', this)">Todos</button>
+    <button class="store-filter" onclick="filterProducts('gratis', this)">Gratis</button>
+    <button class="store-filter" onclick="filterProducts('guia', this)">Guías PDF</button>
+    <button class="store-filter" onclick="filterProducts('ebook', this)">Ebooks</button>
+    <button class="store-filter" onclick="filterProducts('plantilla', this)">Plantillas</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="store-grid" id="store-grid">
+
+    <!-- PRODUCTO 1: Checklist gratis -->
+    <div class="product-card" data-cat="gratis">
+      <span class="product-badge free">Gratis</span>
+      <div class="product-visual">
+        <span class="product-icon">✓</span>
+        <span class="product-type-label">Checklist · PDF</span>
+      </div>
+      <div class="product-body">
+        <span class="product-category">Inversiones · Gratuito</span>
+        <h2 class="product-name">Checklist del Inversor Principiante</h2>
+        <p class="product-desc">20 pasos concretos para verificar antes de hacer tu primera inversión — organizados en el orden correcto.</p>
+        <ul class="product-includes">
+          <li>20 checkpoints accionables</li>
+          <li>Cubre fondo de emergencia, perfil, ETFs, broker y estrategia</li>
+          <li>Formato imprimible</li>
+          <li>Disponible en español e inglés</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <div class="product-price"><span class="price-free">Gratis</span></div>
+        <a href="https://clearfinancestore.gumroad.com/l/checklist-inversor-principiante?_gl=1*1kf8ts6*_ga*MTM0MTU1ODc2NS4xNzgwMjQ1OTU1*_ga_6LJN6D94N6*czE3ODI1MjA1NjgkbzEzJGcxJHQxNzgyNTIwNjg1JGozNiRsMCRoMA.." target="_blank" rel="noopener" class="product-btn">Descargar</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 2: Guía deudas -->
+    <div class="product-card" data-cat="guia">
+      <span class="product-badge">$4.99 USD</span>
+      <div class="product-visual">
+        <span class="product-icon">📋</span>
+        <span class="product-type-label">Guía · PDF · 8 págs.</span>
+      </div>
+      <div class="product-body">
+        <span class="product-category">Finanzas Personales</span>
+        <h2 class="product-name">Guía Rápida para Salir de Deudas</h2>
+        <p class="product-desc">El plan paso a paso para ordenar tus deudas, elegir el método correcto y ejecutarlo mes a mes. Con tablas listas para llenar.</p>
+        <ul class="product-includes">
+          <li>Tabla para mapear todas tus deudas</li>
+          <li>Comparación avalancha vs. bola de nieve</li>
+          <li>Plan mensual de 12 meses</li>
+          <li>Los 4 errores que sabotean el plan</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <div class="product-price">$4.99 <span class="price-note">USD</span></div>
+        <a href="https://clearfinancestore.gumroad.com/l/salir-de-deudas?_gl=1*aucxun*_ga*MTM0MTU1ODc2NS4xNzgwMjQ1OTU1*_ga_6LJN6D94N6*czE3ODI1MjA1NjgkbzEzJGcwJHQxNzgyNTIwNTY4JGo2MCRsMCRoMA.." target="_blank" rel="noopener" class="product-btn">Obtener</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 3: Ebook grande (coming soon) -->
+    <div class="product-card" data-cat="ebook">
+      <span class="product-badge">Próximamente</span>
+      <div class="product-visual">
+        <span class="product-icon">📘</span>
+        <span class="product-type-label">Ebook · PDF · ~45 págs.</span>
+      </div>
+      <div class="product-body">
+        <span class="product-category">Guía Completa · Inversiones</span>
+        <h2 class="product-name">Finanzas Claras: La Guía Completa para Latinoamericanos</h2>
+        <p class="product-desc">De presupuesto a inversión — 10 capítulos, paso a paso, sin jerga innecesaria. El recurso más completo de Clear Finance.</p>
+        <ul class="product-includes">
+          <li>10 capítulos: presupuesto, deudas, ahorro, inversión</li>
+          <li>Tipos de instrumentos: acciones, bonos, ETFs y más</li>
+          <li>Riesgo y diversificación explicados con ejemplos</li>
+          <li>Tu primer portafolio paso a paso</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <div class="product-price">$12.99 <span class="price-note">USD · próximamente</span></div>
+        <a href="../index.html#newsletter" class="product-btn secondary">Notificarme</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 4: Plantilla presupuesto (coming soon) -->
+    <div class="product-card" data-cat="plantilla">
+      <span class="product-badge">Próximamente</span>
+      <div class="product-visual">
+        <span class="product-icon">📊</span>
+        <span class="product-type-label">Plantilla · Google Sheets</span>
+      </div>
+      <div class="product-body">
+        <span class="product-category">Finanzas Personales</span>
+        <h2 class="product-name">Plantilla de Presupuesto 50/30/20</h2>
+        <p class="product-desc">Hoja de cálculo lista para usar con la regla 50/30/20 ya configurada. Solo ingresa tus números y el dashboard se actualiza solo.</p>
+        <ul class="product-includes">
+          <li>Categorías de necesidades, deseos y ahorro pre-configuradas</li>
+          <li>Gráfico de distribución automático</li>
+          <li>Comparativa mes a mes</li>
+          <li>Instrucciones incluidas</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <div class="product-price">$5.99 <span class="price-note">USD · próximamente</span></div>
+        <a href="../index.html#newsletter" class="product-btn secondary">Notificarme</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 5: Plantilla flujo de caja (coming soon) -->
+    <div class="product-card" data-cat="plantilla">
+      <span class="product-badge">Próximamente</span>
+      <div class="product-visual">
+        <span class="product-icon">💼</span>
+        <span class="product-type-label">Plantilla · Google Sheets</span>
+      </div>
+      <div class="product-body">
+        <span class="product-category">Negocios · Pymes</span>
+        <h2 class="product-name">Plantilla de Flujo de Caja para Pymes</h2>
+        <p class="product-desc">Controla las entradas y salidas de tu negocio mes a mes. Con semáforo automático, dashboard y proyección a 12 meses.</p>
+        <ul class="product-includes">
+          <li>Proyección mensual a 12 meses</li>
+          <li>Semáforo automático (verde/rojo por mes)</li>
+          <li>Dashboard con indicadores clave</li>
+          <li>Instrucciones y artículo relacionado</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <div class="product-price">$8.99 <span class="price-note">USD · próximamente</span></div>
+        <a href="../index.html#newsletter" class="product-btn secondary">Notificarme</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AFFILIATE DISCLOSURE -->
+  <div class="store-disclosure">
+    <strong style="color:rgba(248,246,241,0.5);">Aviso:</strong> Los productos de esta tienda son creados por Clear Finance. Las compras se procesan de forma segura a través de Gumroad. Como Asociado de Amazon, también ganamos comisiones por compras de libros recomendados en nuestros artículos. · <em>Products sold through Gumroad. As an Amazon Associate we earn from qualifying purchases.</em>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-logo">Clear <span>Finance</span></a>
+        <p class="footer-about">Educación financiera honesta, rigurosa y accesible para personas, familias y emprendedores.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Explorar</span>
+        <ul class="footer-links">
+          <li><a href="blog.html">Todos los artículos</a></li>
+          <li><a href="../tools/index.html">Herramientas</a></li>
+          <li><a href="about.html">Sobre nosotros</a></li>
+          <li><a href="glosario.html">Glosario</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Herramientas</span>
+        <ul class="footer-links">
+          <li><a href="../tools/compound.html">Interés Compuesto</a></li>
+          <li><a href="../tools/mortgage.html">Hipoteca</a></li>
+          <li><a href="../tools/index.html">Ver todas</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Legal</span>
+        <ul class="footer-links">
+          <li><a href="../index.html#newsletter">Newsletter</a></li>
+          <li><a href="privacy.html">Política de privacidad</a></li>
+          <li><a href="terms.html">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Clear Finance · Todos los derechos reservados</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-amazon-disclosure" style="padding:0.6rem 0;border-top:1px solid rgba(184,154,90,0.08);margin-top:0.8rem;">
+      <p style="font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;color:rgba(248,246,241,0.25);line-height:1.6;">
+        Como Asociado de Amazon, gano comisiones por compras que califican · As an Amazon Associate I earn from qualifying purchases.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => { toggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    // Filter
+    function filterProducts(cat, btn) {
+      document.querySelectorAll('.store-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.product-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
+  <script src="../assets/js/cookies.js"></script>
+
+</body>
+</html>
